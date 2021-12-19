@@ -1,0 +1,295 @@
+﻿@using Commons;
+@{
+    ViewBag.Title = "BankInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32)Commons.Enums.ScreenID.CreateUser;
+}
+
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/BankInformation.js"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">Administrator</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrator</a></li>
+                            <li class="breadcrumb-item active">Bank Information</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                        <input type="hidden" id="hdnClinicCode" name="hdnClinicCode" value="@Constants.ClinicCode" />
+                        <input type="hidden" id="hdnBankID" name="hdnBankID" value="0" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card FirstCard">
+                        <div class="card-body">
+                            <h4 class="card-title">Bank Detail</h4>
+                            <h6 class="card-subtitle">You can view, edit or delete Bank.</h6>
+                            <div class="table-responsive m-t-40" style="overflow:auto">
+                                <table id="TableBankDetail" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">ID</th>
+                                            <th>Bank</th>
+                                            <th>Acronym</th>
+                                            <th>Branch Code</th>
+                                            <th>Phone Number</th>
+                                            <th>Website</th>
+                                            <th hidden="hidden">Address</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>                                    
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Bank Information</h5>
+                            <h6 class="card-subtitle">Define Bank Detai Here.</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtBankName" name="txtBankName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtBankName">Bank Name</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtAcronym" name="txtAcronym" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtAcronym">Acronym</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtBankCode" name="txtBankCode" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtBankCode">Branch Code</label>
+                                </div>
+                                <div class="col-lg-3 form-group ">
+                                    <input type="text" id="txtPhoneNumber" name="txtPhoneNumber" class="form-control floating-Input PhoneNoMasking clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtPhoneNumber">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtWebsite" name="txtWebsite" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtWebsite">Website</label>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <input type="text" id="txtAddress" name="txtAddress" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtAddress">Address</label>
+                                </div>
+                                <div class="col-lg-2 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkBankActive" required="" class="custom-control-input" id="chkBankActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkBankActive">Active</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div style="text-align: right;" class="card-body">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-12"></div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="addEditBank" class="btn-custom btn btn-success waves-effect waves-light">Save</button>
+                                </div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="cancelBank" class="btn-custom btn btn-inverse waves-effect waves-light">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var BankInformation = (function () {
+        var init = function () {
+            BankInformation.bindPageEvents();
+            BankInformation.GetBankData();
+        };
+
+        var ValidForm = function () {
+            var msg = '';
+            alertMsgFlag = false;
+
+            var BankName = $("#txtBankName").val()
+            if (BankName == '' || BankName == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Bank Name. <br/>";
+            }
+
+            var BranchCode = $("#txtBankCode").val()
+            if (BranchCode == '' || BranchCode == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Branch Code. <br/>";
+            }
+
+            var Address = $("#txtAddress").val()
+            if (Address == '' || Address == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Address. <br/>";
+            }
+
+            if (alertMsgFlag) {
+                bootbox.alert({ title: "Please provide value for following field(s):", message: msg });
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        var bindPageEvents = function () {
+            $("#addEditBank").on("click", function () {
+                debugger;
+                if (ValidForm()) {
+                    debugger;
+                    var active = false;
+                    if ($("#chkBankActive").prop("checked") == true) {
+                        active = true;
+                    }
+                    var data = {
+                        Bank_ID: $("#hdnBankID").val(),
+                        Bank_Name: $("#txtBankName").val(),
+                        Acronym: $("#txtAcronym").val(),
+                        Branch_Code: $("#txtBankCode").val(),
+                        Website: $("#txtWebsite").val(),
+                        Phone_Number: $("#txtPhoneNumber").val(),
+                        Address: $("#txtAddress").val(),
+                        Active: active
+                    }
+
+                    var ID = $("#hdnBankID").val();
+                    var URL = "/Admin/AddBankInformation/";
+
+                    if (ID > 0) {
+                        URL = "/Admin/UpdateBankInformation/";
+                    }
+
+                    $.ajax({
+                        url: URL,
+                        type: "POST",
+                        //contentType: false,
+                        dataType: 'json',
+                        data: data,
+                        cache: false,
+                        async: true,
+                        success: function (data) {
+                            debugger;
+                            if (data == 'Success') {
+                                common.SuccessMessage(common.Message.Success);
+                                common.ResetForm();
+                                common.SetFormLabel();
+                                BankInformation.GetBankData();
+                                $("#chkBankActive").prop("checked", false);
+                            } else {
+                                common.ErrorMessage(common.Message.Error);
+                            }
+                        },
+                        error: function () {
+                            common.ErrorMessage(common.Message.Error)
+                        }
+                    });
+                };
+            });
+
+            $("#cancelBank").on("click", function () {
+                common.ResetForm();
+                common.SetFormLabel();
+                $("#hdnBankID").val(0);
+                BankInformation.GetBankData();
+            });
+
+        };
+
+        var URL = "/Admin/GetBankInformation?RequestVerificationToken=@Utility.TokenHeaderValue()";
+        var table;
+        var GetBankData = function () {
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="BankInformation.EditRecord(this);"><i class="fa fa-edit" title="Edit"></i></a>'
+                },
+                { "mDataProp": "Bank_ID", "visible": false },
+                { "mDataProp": "Bank_Name" },
+                { "mDataProp": "Acronym" },
+                { "mDataProp": "Branch_Code" },
+                { "mDataProp": "Website" },
+                { "mDataProp": "Phone_Number" },
+                { "mDataProp": "Address", "visible": false },
+                { "mDataProp": "Active", "visible": false },
+            ];
+
+            common.GridView('TableBankDetail', URL, Col);
+            BankInformation.table = $("#TableBankDetail").DataTable();
+            $('#TableBankDetail_length label select').removeClass('form-control');
+            $('#TableBankDetail_length label select').removeClass('form-control-sm');
+            $('.bottom div').removeClass('row');
+            $('.bottom div').addClass('Botton-row');
+        };
+
+        var EditRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = BankInformation.table.row($(tr)).data();
+            $("#hdnBankID").val(getCell["Bank_ID"]),
+            $("#txtBankName").val(getCell["Bank_Name"]),
+            $("#txtAcronym").val(getCell["Acronym"]),
+            $("#txtBankCode").val(getCell["Branch_Code"]),
+            $("#txtWebsite").val(getCell["Website"]),
+            $("#txtPhoneNumber").val(getCell["Phone_Number"]),
+            $("#txtAddress").val(getCell["Address"])
+
+            var checkActive = getCell["Active"]
+            if (checkActive == true) {
+                $("#chkBankActive").prop('checked', true)
+            }
+            else {
+                $("#chkBankActive").prop('checked', false)
+            }
+
+            common.SetFormLabel();
+        }
+
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            ValidForm: ValidForm,
+            GetBankData: GetBankData,
+            EditRecord: EditRecord
+        };
+    })();
+    $(document).ready(function () {
+        BankInformation.init();
+        $('#TableBankDetail_length label select').removeClass('form-control');
+        $('#TableBankDetail_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+    });
+</script>

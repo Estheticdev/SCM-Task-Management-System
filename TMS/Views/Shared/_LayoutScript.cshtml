@@ -1,0 +1,33 @@
+﻿@using Commons;
+<script type="text/javascript">
+    @*$.ajaxSetup({
+        beforeSend: function (xhr, opts) {
+            alert("hi");
+            console.log("hi")
+            if (opts.type.toLowerCase() === "post") {
+                xhr.setRequestHeader('RequestVerificationToken', '@Utility.TokenHeaderValue()');
+            }
+        },
+        complete: function (xhr, status) {
+            if (xhr.getResponseHeader("CustomHeader") == "RedirectToLogin" && xhr.status == 404) {
+                window.location.assign("/error" + "?errorMessage=Anti forgery token not found");
+            }
+        }
+    });
+    $(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr, opts) {
+                alert("hi");
+                console.log("hi")
+                if (opts.type.toLowerCase() === "post") {
+                    xhr.setRequestHeader('RequestVerificationToken', '@Utility.TokenHeaderValue()');
+                }
+            },
+            complete: function (xhr, status) {
+                if (xhr.getResponseHeader("CustomHeader") == "RedirectToLogin" && xhr.status == 404) {
+                    window.location.assign("/error" + "?errorMessage=Anti forgery token not found");
+                }
+            }
+        });
+    });*@
+</script>

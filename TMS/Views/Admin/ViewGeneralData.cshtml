@@ -1,0 +1,245 @@
+﻿@using Commons;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var formName = (Int32)Enums.ScreenID.ViewGeneralData;
+}
+
+@Styles.Render("~/Content/ApplicationCSS")
+@Styles.Render("~/Content/ScreenCSS")
+<script src="~/Scripts/ActionScripts/ViewGeneralData.js"></script>
+@Scripts.Render("~/bundles/ApplicationScripts")
+@Scripts.Render("~/bundles/ScreenScripts")
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <input type="hidden" id="hdnDataType"  value="@Request.QueryString["GeneralType"]" />
+                    <div class="table-responsive" style="overflow:auto; height: 210px">
+                        <table id="TableGeneralSetups" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th hidden="hidden">ID</th>
+                                    <th hidden="hidden">ddlID</th>
+                                    <th id="service">Service</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+<script>
+    var GeneralData = (function () {
+        var init = function () {
+            var type = $("#hdnDataType").val();
+            GeneralData.GetGeneralData(type);
+        };
+
+      
+        var GetGeneralData = function (type) {
+            var URL = '/Admin/GetSetupFormData?RequestVerificationToken=@Utility.TokenHeaderValue()'
+            $.ajax({
+                url: URL,
+                type: "GET",
+                //contentType: false,
+                dataType: 'json',
+                data: { Type: type },
+                cache: false,
+                async: true,
+                success: function (data) {
+                    debugger;
+                    if (data != null) {
+                        GeneralData.PopulateValue(data)
+                    } else {
+                        common.ErrorMessage(common.Message.Error);
+                    }
+                },
+                error: function () {
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+        }
+
+        var DeleteGeneralData = function (id, type) {
+            debugger;
+
+            $.ajax({
+                url: '/Admin/DeleteSetupFormData/',
+                type: "POST",
+                //contentType: false,
+                dataType: 'json',
+                data: { ID: id, Type: type },
+                cache: false,
+                async: true,
+                success: function (data) {
+                    debugger;
+                    if (data == 'Deleted') {
+                        var hdnType = $("#hdnDataType").val();
+                        GeneralData.GetGeneralData(hdnType);
+                    } else {
+                        common.ErrorMessage(common.Message.Error);
+                    }
+                },
+                error: function () {
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+        }
+
+        AddRow = function (ID, ServiceID, Service, Name, Active) {
+            debugger;
+            if (Service != '') {
+                $('#service').show();
+                var tr = '<tr>'
+                                  + '<td style="text-align: center;"><i class="fa fa-edit" title="Edit" style="padding-right: 10px;" OnClick="GeneralData.EditRecord(this);"></i>&nbsp;<i class="fa fa-trash-alt editor_remove" title="Delete" OnClick="GeneralData.DeleteRecord(this);"></i></td>'
+                                  + '<td hidden="hidden">' + ID + '</td>'
+                                  + '<td hidden="hidden">' + ServiceID + '</td>'
+                                  + '<td>' + Service + '</td>'
+                                  + '<td>' + Name + '</td>'
+                                  + '<td>' + Active + '</td>'
+                                  + '</tr>'
+            }
+            else {
+                $('#service').hide();
+                var tr = '<tr>'
+                                  + '<td style="text-align: center;"><i class="fa fa-edit" title="Edit" style="padding-right: 10px;" OnClick="GeneralData.EditRecord(this);"></i>&nbsp;<i class="fa fa-trash-alt editor_remove" title="Delete" OnClick="GeneralData.DeleteRecord(this);"></i></td>'
+                                  + '<td hidden="hidden">' + ID + '</td>'
+                                  + '<td>' + Name + '</td>'
+                                  + '<td>' + Active + '</td>'
+                                  + '</tr>'
+            }
+
+            $("#TableGeneralSetups > tbody").append(tr);
+        }
+
+        var PopulateValue = function (data) {
+
+            $("#TableGeneralSetups > tbody").html("");
+
+            $.each(data, function (index, value) {
+                GeneralData.AddRow(data[index]['ID'], data[index]['ServiceID'], data[index]['Service'], data[index]['Name'], data[index]['Active'])
+            });
+        }
+
+        var EditRecord = function (data) {
+            debugger;
+            var tr = $(data).parents("tr");
+            var hdnType = $("#hdnDataType").val();
+            var checkActive = '';
+
+            if (hdnType == 'Gender') {
+                $("#hdnGenderID").val($(tr).children('td:eq(1)').text());
+                $("#txtGenderName").val($(tr).children('td:eq(2)').text());
+
+                checkActive = $(tr).children('td:eq(3)').text();
+                if (checkActive == 'Active') {
+                    $("#chkGenderActive").prop('checked', true)
+                }
+                else {
+                    $("#chkGenderActive").prop('checked', false)
+                }
+
+                common.ClosePopupLvl1Button();
+            }
+
+            if (hdnType == 'MaritalStatus') {
+                $("#hdnMaritalStatusID").val($(tr).children('td:eq(1)').text());
+                $("#txtMaritalStatus").val($(tr).children('td:eq(2)').text());
+
+                checkActive = $(tr).children('td:eq(3)').text();
+                if (checkActive == 'Active') {
+                    $("#chkMaritalStatusActive").prop('checked', true)
+                }
+                else {
+                    $("#chkMaritalStatusActive").prop('checked', false)
+                }
+
+                common.ClosePopupLvl1Button();
+            }
+
+            if (hdnType == 'Disease') {
+                $("#hdnDiseaseID").val($(tr).children('td:eq(1)').text());
+                $("#ddlService").val($(tr).children('td:eq(2)').text());
+                $("#txtDiseaseName").val($(tr).children('td:eq(4)').text());
+
+                checkActive = $(tr).children('td:eq(5)').text();
+                if (checkActive == 'Active') {
+                    $("#chkDiseaseActive").prop('checked', true)
+                }
+                else {
+                    $("#chkDiseaseActive").prop('checked', false)
+                }
+
+                common.ClosePopupLvl1Button();
+            }
+
+            if (hdnType == 'Specialization') {
+                $("#hdnSpecializationID").val($(tr).children('td:eq(1)').text());
+                $("#txtSpecializationName").val($(tr).children('td:eq(2)').text());
+
+                checkActive = $(tr).children('td:eq(3)').text();
+                if (checkActive == 'Active') {
+                    $("#chkSpecializationActive").prop('checked', true)
+                }
+                else {
+                    $("#chkSpecializationActive").prop('checked', false)
+                }
+
+                common.ClosePopupLvl1Button()
+            }
+
+            common.SetFormLabel();
+        }
+
+        var DeleteRecord = function (data) {
+            debugger;
+            var tr = $(data).parents("tr");
+            var hdnType = $("#hdnDataType").val();
+
+            if (hdnType == 'Gender') {
+                var ID = $(tr).children('td:eq(1)').text();
+                GeneralData.DeleteGeneralData(ID, hdnType);
+            }
+
+            if (hdnType == 'MaritalStatus') {
+                var ID = $(tr).children('td:eq(1)').text();
+                GeneralData.DeleteGeneralData(ID, hdnType);
+            }
+
+            if (hdnType == 'Disease') {
+                var ID = $(tr).children('td:eq(1)').text();
+                GeneralData.DeleteGeneralData(ID, hdnType);
+            }
+
+            if (hdnType == 'Specialization') {
+                var ID = $(tr).children('td:eq(1)').text();
+                GeneralData.DeleteGeneralData(ID, hdnType);
+            }
+        }
+
+
+        return {
+            init: init,
+            GetGeneralData: GetGeneralData,
+            PopulateValue: PopulateValue,
+            AddRow: AddRow,
+            EditRecord: EditRecord,
+            DeleteRecord: DeleteRecord,
+            DeleteGeneralData: DeleteGeneralData
+        };
+    })();
+
+    $(document).ready(function () {
+        GeneralData.init();
+
+        $(".modal-body").children("div").hide();
+        $(".modal-body").children("footer").hide();
+    });
+</script>

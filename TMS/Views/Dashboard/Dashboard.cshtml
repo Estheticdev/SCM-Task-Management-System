@@ -1,0 +1,277 @@
+﻿@using Commons;
+@{ ViewBag.Title = "SCM Task Management System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32)Enums.ScreenID.ClinicDetail; }
+
+@*@Styles.Render("~/Content/ScreenCSS")*@
+
+@Scripts.Render("~/bundles/ScreenScripts")
+<link href="~/Content/ScreenCSS/common.css" rel="stylesheet" />
+<link href="~/Content/ScreenCSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Content/ScreenCSS/DateTimePicker.min.css" rel="stylesheet" />
+<link href="~/Content/ScreenCSS/fileinput.css" rel="stylesheet" />
+<link href="~/Content/ScreenCSS/jquery.timepicker.min.css" rel="stylesheet" />
+<link href="~/Content/ScreenCSS/theme.css" rel="stylesheet" />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">Activity Sheet</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">DashBoard</a></li>
+                            <li class="breadcrumb-item active">Activity Sheet</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card FirstCard">
+                        <div class="card-body ">
+                            <h4 class="card-title">Activity Sheet</h4>
+                            <h6 class="card-subtitle"></h6>
+                            <div class="table-responsive m-t-40" style="overflow:auto">
+                                <table id="TableClinicDetail" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            @*<th>Action</th>
+                                                <th>Sr</th>
+                                                <th hidden="hidden">Content_Type</th>
+                                                <th>ProjectName</th>
+                                                <th>Patch#</th>
+                                                <th>Plan Codefreeze</th>
+                                                <th>plan Shipment</th>
+                                                <th>shipped</th>
+                                                <th hidden="hidden">jira_issue</th>
+                                                <th hidden="hidden">optimization</th>
+                                                <th hidden="hidden">actual_build</th>
+                                                <th hidden="hidden">actual_codefreeze</th>
+                                                <th hidden="hidden">actual_shipment</th>
+                                                <th hidden="hidden">build_machine</th>
+                                                <th hidden="hidden">client</th>
+                                                <th hidden="hidden">comments</th>
+                                                <th hidden="hidden">created</th>
+                                                <th hidden="hidden">itemtype</th>
+                                                <th hidden="hidden">path</th>*@
+                                            <th>Action</th>
+                                            <th hidden="hidden">RecordNumber</th>
+                                            <th>Content_Type</th>
+                                            <th>ProjectName</th>
+                                            <th>Pro_Rel_Pat_number</th>
+                                            <th>Plan_Codefreeze</th>
+                                            <th>plan_shipment</th>
+                                            <th hidden="hidden">shipped</th">
+                                            <th hidden="hidden">jira_issue</th>
+                                            <th hidden="hidden">optimization</th>
+                                            <th hidden="hidden">actual_build</th>
+                                            <th hidden="hidden">actual_codefreeze</th>
+                                            <th hidden="hidden">actual_shipment</th>
+                                            <th hidden="hidden">build_machine</th>
+                                            <th hidden="hidden">client</th>
+                                            <th>Status</th>
+                                            <th hidden="hidden">created</th>
+                                            <th hidden="hidden">itemtype</th>
+                                            <th hidden="hidden">path</th>
+                                            <th hidden="hidden">internal_cr</th>
+                                            <th hidden="hidden">uat_issue</th>
+                                            <th hidden="hidden">gaps</th>
+                                            <th hidden="hidden">fault</th>
+                                            <th hidden="hidden">modification</th>
+                                            <th hidden="hidden">datacorrection</th>
+                                            <th hidden="hidden">enhacement</th>
+                                            <th hidden="hidden">others</th>
+                                            <th hidden="hidden">total_category_hd</th>
+                                            <th hidden="hidden">crittical</th>
+                                            <th hidden="hidden">minor</th>
+                                            <th hidden="hidden">moderate</th>
+                                            <th hidden="hidden">total_priory_hd</th>
+                                            <th hidden="hidden">time_planned_code_freeze</th>
+                                            <th hidden="hidden">time_actual_code_freeze</th>
+                                            <th hidden="hidden">time_planned_shipment</th>
+                                            <th hidden="hidden">time_actual_shipment</th>
+                                            <th>primary_name</th>
+                                            <th>secondary_name</th>
+                                            <th hidden="hidden">status</th>
+                                            <th hidden="hidden">effor_hours</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">RecordNumber</th>
+                                            <th>Content_Type</th>
+                                            <th>ProjectName</th>
+                                            <th>Pro_Rel_Pat_number</th>
+                                            <th>Plan_Codefreeze</th>
+                                            <th>plan_shipment</th>
+                                            <th hidden="hidden">shipped</th>
+                                            <th hidden="hidden">jira_issue</th>
+                                            <th hidden="hidden">optimization</th>
+                                            <th hidden="hidden">actual_build</th>
+                                            <th hidden="hidden">actual_codefreeze</th>
+                                            <th hidden="hidden">actual_shipment</th>
+                                            <th hidden="hidden">build_machine</th>
+                                            <th hidden="hidden">client</th>
+                                            <th>Status</th>
+                                            <th hidden="hidden">created</th>
+                                            <th hidden="hidden">itemtype</th>
+                                            <th hidden="hidden">path</th>
+                                            <th hidden="hidden">internal_cr</th>
+                                            <th hidden="hidden">uat_issue</th>
+                                            <th hidden="hidden">gaps</th>
+                                            <th hidden="hidden">fault</th>
+                                            <th hidden="hidden">modification</th>
+                                            <th hidden="hidden">datacorrection</th>
+                                            <th hidden="hidden">enhacement</th>
+                                            <th hidden="hidden">others</th>
+                                            <th hidden="hidden">total_category_hd</th>
+                                            <th hidden="hidden">crittical</th>
+                                            <th hidden="hidden">minor</th>
+                                            <th hidden="hidden">moderate</th>
+                                            <th hidden="hidden">total_priory_hd</th>
+                                            <th hidden="hidden">time_planned_code_freeze</th>
+                                            <th hidden="hidden">time_actual_code_freeze</th>
+                                            <th hidden="hidden">time_planned_shipment</th>
+                                            <th hidden="hidden">time_actual_shipment</th>
+                                            <th>primary_name</th>
+                                            <th>secondary_name</th>
+                                            <th hidden="hidden">status</th>
+                                            <th hidden="hidden">effor_hours</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>}
+<script type="text/javascript">
+    var ClinicDetail = (function () {
+        var init = function () {
+            ClinicDetail.GetClinicData();
+
+        };
+
+        var URL = "/Clinic/GetCurrentMonth?RequestVerificationToken=@Utility.TokenHeaderValue()";
+        var table;
+        var GetClinicData = function () {
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="ClinicDetail.EditRecord(this);"><i class="fa fa-edit" title="Edit"></i></a> &nbsp;<a class="editor_view" onclick="ClinicDetail.ViewRecord(this);"><i class="editor_view fa fa-eye" title="View"></i></a>'
+                },
+                //{ "mDataProp": "Clinic_ID", "visible": false },
+                //{ "mDataProp": "Sr" },
+                //{ "mDataProp": "Content_Type", "visible": false },
+                //{ "mDataProp": "ProjectName" },
+                //{ "mDataProp": "Pro_Rel_Pat_number" },
+                //{ "mDataProp": "Plan_Codefreeze", render:function(d) { console.log(d); return common.toDatetime(d); } },
+                //{ "mDataProp": "plan_shipment", render: function (d) { console.log(d); return common.toDatetime(d); } },
+                //{ "mDataProp": "shipped" },
+                //{ "mDataProp": "jira_issue", "visible": false },
+                //{ "mDataProp": "optimization", "visible": false },
+                //{ "mDataProp": "actual_build", "visible": false },
+                //{ "mDataProp": "actual_codefreeze", render: function (d) { console.log(d); return common.toDatetime(d); } , "visible": false },
+                //{ "mDataProp": "actual_shipment", render: function (d) { console.log(d); return common.toDatetime(d); }, "visible": false },
+                //{ "mDataProp": "build_machine", "visible": false },
+                //{ "mDataProp": "client", "visible": false },
+                //{ "mDataProp": "comments", "visible": false },
+                //{ "mDataProp": "created", "visible": false },
+                //{ "mDataProp": "itemtype", "visible": false },
+                //{ "mDataProp": "path", "visible": false },
+                { "mDataProp": "RecordNumber", "visible": false },
+                { "mDataProp": "Content_Type"},
+                { "mDataProp": "ProjectName" },
+                { "mDataProp": "Pro_Rel_Pat_number" },
+                { "mDataProp": "Plan_Codefreeze", render: function (d) { console.log(d); return common.toDatetime(d); } },
+                { "mDataProp": "plan_shipment", render: function (d) { console.log(d); return common.toDatetime(d); } },
+                { "mDataProp": "shipped", "visible": false },
+                { "mDataProp": "jira_issue", "visible": false },
+                { "mDataProp": "optimization" , "visible": false},
+                { "mDataProp": "actual_build" , "visible": false},
+                { "mDataProp": "actual_codefreeze", render: function (d) { console.log(d); return common.toDatetime(d); } , "visible": false},
+                { "mDataProp": "actual_shipment", render: function (d) { console.log(d); return common.toDatetime(d); } , "visible": false},
+                { "mDataProp": "build_machine" , "visible": false},
+                { "mDataProp": "client" , "visible": false},
+                { "mDataProp": "comments"},
+                { "mDataProp": "created", render: function (d) { console.log(d); return common.toDatetime(d); }, "visible": false},
+                { "mDataProp": "itemtype" , "visible": false},
+                { "mDataProp": "path" , "visible": false},
+                { "mDataProp": "internal_cr" , "visible": false},
+                { "mDataProp": "uat_issue" , "visible": false},
+                { "mDataProp": "gaps" , "visible": false},
+                { "mDataProp": "fault" , "visible": false},
+                { "mDataProp": "modification" , "visible": false},
+                { "mDataProp": "datacorrection" , "visible": false},
+                { "mDataProp": "enhacement" , "visible": false},
+                { "mDataProp": "others" , "visible": false},
+                { "mDataProp": "total_category_hd" , "visible": false},
+                { "mDataProp": "crittical" , "visible": false},
+                { "mDataProp": "minor" , "visible": false},
+                { "mDataProp": "moderate" , "visible": false},
+                { "mDataProp": "total_priory_hd" , "visible": false},
+                { "mDataProp": "time_planned_code_freeze" , "visible": false},
+                { "mDataProp": "time_actual_code_freeze" , "visible": false},
+                { "mDataProp": "time_planned_shipment" , "visible": false},
+                { "mDataProp": "time_actual_shipment" , "visible": false},
+                { "mDataProp": "primary_name" },
+                { "mDataProp": "secondary_name"},
+                { "mDataProp": "status" , "visible": false},
+                { "mDataProp": "effor_hours" , "visible": false},
+            ];
+
+            common.GridView('TableClinicDetail', URL, Col);
+            ClinicDetail.table = $("#TableClinicDetail").DataTable();
+        };
+
+
+
+        var ViewRecord = function (data) {
+            debugger;
+            var tr = $(data).parents("tr");
+            var getCell = ClinicDetail.table.row($(tr)).data();
+            var id = getCell["RecordNumber"];
+            var URL = '/Clinic/ViewClinic?&RecordNumber=' + id +'&RequestVerificationToken=@Utility.TokenHeaderValue()'
+            common.openBSModelPopupLvl1(URL, 'large', 'Activity Detail');
+        }
+
+        var EditRecord = function (data) {
+            debugger;
+            var tr = $(data).parents("tr");
+            var getCell = ClinicDetail.table.row($(tr)).data();
+            var id = getCell["RecordNumber"];
+            var URL = '/Clinic/ViewClinic?&RecordNumber=' + id + '&RequestVerificationToken=@Utility.TokenHeaderValue()'
+            window.location.href = "/Clinic/AddEditClinic?RequestVerificationToken=@Utility.TokenHeaderValue()" + "&RecordNumber=" + id;
+            // var URL = 'AddData.aspx?&RecordNumber=' + id + '&RequestVerificationToken=@Utility.TokenHeaderValue()' //Shaban form
+           // window.location.href = "AddData.aspx?RequestVerificationToken=@Utility.TokenHeaderValue()" + "&RecordNumber=" + id; //Shaban
+        }
+
+        return {
+            init: init,
+            GetClinicData: GetClinicData,
+            table: table,
+            ViewRecord: ViewRecord,
+            EditRecord: EditRecord,
+        };
+    })();
+
+    $(document).ready(function () {
+        $('#TableClinicDetail_length label select').removeClass('form-control');
+        $('#TableClinicDetail_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+
+        ClinicDetail.init();
+    });
+</script>

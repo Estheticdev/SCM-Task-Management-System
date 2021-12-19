@@ -1,0 +1,91 @@
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\Commons.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\log4net.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.Razor.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Commons.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\log4net.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.Razor.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Commons.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\DataAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.Razor.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Commons.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\DataAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.Razor.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\log4net.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\Debug\log4net.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csprojAssemblyReference.cache
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csproj.CoreCompileInputs.cache
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csproj.CopyComplete
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csproj.CoreCompileInputs.cache
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.dll.config
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\BusinessAccessLayer.pdb
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Commons.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\log4net.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.WebPages.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\MySql.Data.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.Razor.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Google.Protobuf.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Zstandard.Net.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\BouncyCastle.Crypto.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Ubiety.Dns.Core.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Memory.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Buffers.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Compression.LZ4.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Hash.xxHash.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Commons.pdb
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\DataAccessLayer.dll.config
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\log4net.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.WebPages.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\MySql.Data.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.Razor.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Google.Protobuf.pdb
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\Google.Protobuf.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Memory.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\System.Buffers.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Compression.LZ4.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\bin\Debug\K4os.Hash.xxHash.xml
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csprojAssemblyReference.cache
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.csproj.CopyComplete
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.dll
+D:\SCM Task\SCM_TaskManagement_System\BusinessAccessLayer\obj\Debug\BusinessAccessLayer.pdb

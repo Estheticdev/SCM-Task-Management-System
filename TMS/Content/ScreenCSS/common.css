@@ -1,0 +1,148 @@
+﻿/*label {
+    font-weight: bold !important;
+}*/
+
+.card-title {
+    font-weight: bold !important;
+    color: darkslategray;
+}
+
+.floating-Input {
+    min-height: 38px !important;
+}
+
+.floating-Select {
+    min-height: 38px !important;
+}
+
+.floating-TextArea {
+    height: 48px !important;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: 0px !important;
+}
+
+.btn-custom {
+    width: 100%;
+}
+
+.page-titles{
+    padding-top: 64px !important;
+    /*padding-bottom: 20px !important;*/
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-bottom: 2px !important;
+}
+
+.btn-p {
+    padding: 2px
+}
+
+.modal-header {
+    display: inline !important;
+    
+}
+
+.modal-title{
+    font-size: 15px !important;
+    font-weight: 500 !important;
+}
+
+.btn-bootbox{
+    background: #00c292 !important;
+    border-color: #00c292 !important;
+    color: white !important;
+}
+
+.Botton-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.editor_remove{
+    color: #e0072f !important;
+}
+
+.editor_edit {
+    color: #03a9f3 !important;
+}
+
+
+.editor_view {
+    color: #00c292 !important;
+}
+
+@media all and (max-width: 480px) {
+    .Botton-row {
+        /*display: -ms-flexbox;*/
+        display: -webkit-inline-box !important;
+        /*-ms-flex-wrap: wrap;*/
+        flex-wrap: wrap;
+        margin-right: -10px !important;
+        /*margin-left: -10px !important;*/
+    }
+}
+
+.Custom-Footor {
+    padding: 15px !important;
+    /*height: 50px !important;*/
+}
+
+.FirstCard {
+    margin-top: 5px !important;
+}
+
+.table td, .table th {
+    padding: 0.5rem !important;
+}
+
+.fa {
+    cursor: pointer;
+}
+
+.Delete-Icon {
+    color: #e21b1b;
+}
+/*.PagingLength {
+    z-index: 1000;
+}*/
+
+.Rounded-Btn {
+    text-align: right;
+}
+
+.custom-chk {
+    padding-left: 2rem !important;
+    margin-top: 1em !important;
+}
+
+.PopUp-BackGround {
+    background: #edf1f5 !important;
+}
+
+.Custom-Card-Body {
+    padding-left: 1.25rem !important;
+    padding-top: 1.25em !important;
+    padding-right: 1.25em !important;
+    padding-bottom: 0em !important;
+}
+
+.td-centre {
+    text-align:center;
+}
+
+@media only screen and (min-width:1024px){
+
+    .LoadingText { display: inline; }
+  }
+@media only screen and (max-width:600px){
+
+    .LoadingText { display: none; }
+    .LoadingGif { display: inline; }
+
+  }

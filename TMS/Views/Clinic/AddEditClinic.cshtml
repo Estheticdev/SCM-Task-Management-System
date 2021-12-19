@@ -1,0 +1,933 @@
+﻿@using Commons;
+
+@{ ViewBag.Title = "AddEditActivity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var formName = (Int32)Commons.Enums.ScreenID.AddEditClinic;
+
+    //var primaryData = ViewBag.Primary;
+    var Client = ViewBag.Client;
+    var ProjectType = ViewBag.ProjectType;
+    }
+
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="@Url.Content("~/Scripts/ActionScripts/ClinicScripts.js")"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Add Activity</h4>
+            </div>
+            <div class="col-md-7 align-self-center text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">TMS</a></li>
+                        <li class="breadcrumb-item active">Add Activity</li>
+                    </ol>
+                    @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                    <input type="hidden" id="hdnClinicCode" name="hdnClinicCode" value="@Constants.ClinicCode" />
+                    <input type="hidden" class="clearHdnText" id="RecordNumber" name="RecordNumber" value="@Request.QueryString["RecordNumber"]" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card FirstCard">
+                    <div class="card-body">
+                        <div class="row m-t-40">
+                            <div class="col-lg-4 form-group">
+                                <select class="form-control floating-Select resetDDL" id="ddlProjectList">
+                                    <option value=""></option>
+                                    @foreach (var item in ProjectType)
+                                    {
+                                        <option value="@item.ID">@item.Value</option>
+}
+                                </select><span class="bar"></span>
+                                <label for="txtClinicName">Project Type</label>
+                            </div>
+                            <div class="col-lg-4 form-group">
+                                <select class="form-control floating-Select resetDDL" id="ddlClient">
+                                    <option value=""></option>
+                                    @foreach (var item in Client)
+                                    {
+                                        <option value="@item.ID">@item.Value</option>
+}
+                                </select><span class="bar"></span>
+                                <label for="ddlStartTime">Client</label>
+                            </div>
+                            <div class="col-lg-4 form-group">
+                                <input type="text" id="txtReleasePatchNumber" name="txtReleasePatchNumber" class="form-control floating-Input clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtContactNumber">Release or Patch Number.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 form-group">
+                                <select class="form-control floating-Select resetDDL" id="ddlPrimary">
+                                    <option value=""></option>
+                                    @foreach (var item in ViewBag.Parimary)
+                                    {
+                        <option value="@item.ID">@item.Value</option>}
+                                </select><span class="bar"></span>
+                                <label for="ddlStartTime">Primary</label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <select class="form-control floating-Select resetDDL" id="ddlSecondary">
+                                    <option value=""></option>
+                                    @foreach (var item in ViewBag.Parimary)
+                                    {
+                        <option value="@item.ID">@item.Value</option>}
+                                </select><span class="bar"></span>
+                                <label for="ddlStartTime">Secondary </label>
+                            </div>
+
+
+                            <div class="col-lg-3 form-group">
+                                <select class="form-control floating-Select resetDDL" id="ddlStatus">
+                                    @*<option value=""></option>*@
+                                    @foreach (var item in ViewBag.Status)
+                                    {
+                        <option value="@item.ID">@item.Value</option>
+}
+                                </select><span class="bar"></span>
+                                <label for="ddlStartTime">Status </label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <input type="text" maxlength="3" id="txtTotalBuilds" name="txtBuilds" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtWebsite">Total Builds</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="txtPlanCodeFreeze" name="dtpCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerForward" value="">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Planned Code Freeze</label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="txtPlanCodeFreezeTime" maxlength="5" name="dtpCodeFreezeTime" data-language='en' class="form-control floating-Input clearText bookAppointment" value="18:00">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Planned Code Freeze Time</label>
+                            </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtActualCodeFreeze" name="dtpActulaCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerBackward" value="">
+                                    <span class="bar"></span>
+                                    <label class="lbl" for="dtpPatientAge">Actual Code Freeze</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtActualCodeFreezeTime" maxlength="5" name="dtpActulaCodeFreezeTime" data-language='en' class="form-control floating-Input clearText bookAppointment" value="18:00">
+                                    <span class="bar"></span>
+                                    <label class="lbl" for="dtpPatientAge">Actual Code FreezeTime</label>
+                                </div>
+                           
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="TxtPlanShipment" name="dtpPlanShipment" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerBackward" value="">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Planned Shipment</label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="TxtPlanShipmentTime" maxlength="10" name="dtpPlanShipmentTime" data-language='en' class="form-control floating-Input clearText bookAppointment" value="18:00">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Planned Shipment Time</label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="TxtActualShipment" name="dtpActualShipment" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerBackward" value="">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Actual Shipment</label>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="TxtActualShipmentTime" maxlength="5" name="dtpActualShipmenttime" data-language='en' class="form-control floating-Input clearText bookAppointment" value="18:00">
+                                <span class="bar"></span>
+                                <label class="lbl" for="dtpPatientAge">Actual Shipment Time</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Category HD's</h5>
+                        <div class="row m-t-40">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtFault" maxlength="3" name="txtFault" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtFault">Fault</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtModification" maxlength="3" name="txtModification" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtModification">Modification</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtDataCorrection" maxlength="3" name="txtDataCorrection" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtContactNumber">Data Correction</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtEnhancement" maxlength="3" name="txtEnhancement" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtEnhancement">Enhancement</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtOptimization" maxlength="3" name="txtOptimization" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtOptimization">Optimization</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtOthers" maxlength="3" name="txtOthers" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtOthers">Others</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <input type="text" id="txtHDTotal" maxlength="5" readonly tabindex="-1" name="txtTotal2" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtTotal2">Total</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Priority-HD's</h5>
+                        <div class="row m-t-40">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtCritical" maxlength="3" name="txtCritical" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtCritical">Critical</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtModerate" maxlength="3" name="txtModerate" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtModerate">Moderate</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtMinor" maxlength="3" name="txtMinor" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtMinor">Minor</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtPTotal" maxlength="5" readonly tabindex="-1" name="txtTotal" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtPTotal">Total</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtInternalCRs" maxlength="3" name="txtInternalCRs" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtInternalCRs">Internal CR's</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtGAPs" maxlength="3" name="txtGAPs" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtGAPs">GAPs</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtJira" maxlength="3" name="txtJira" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtJira">Jira Issue</label>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="text" id="txtUAT" maxlength="3" name="txtUAT" class="form-control floating-Input NumberOnly clearText" value="">
+                                <span class="bar"></span>
+                                <label for="txtUAT">UAT Issue</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <textarea class="form-control floating-TextArea clearText" rows="2" id="txtComments"></textarea>
+                                <span class="bar"></span>
+                                <label for="txtComments">Comments</label>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <textarea maxlength="5" class="form-control floating-TextArea clearText" rows="2" id="txtEffort"></textarea>
+                                <span class="bar"></span>
+                                <label for="txtEffort">Efforts</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div style="text-align: center;" class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-12"></div>
+                            <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                <button type="button" id="SaveUpdateData" class="btn-custom btn btn-success waves-effect waves-light"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            </div>
+                            <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                <button type="button" id="cancelRecords" class="btn-custom btn btn-inverse waves-effect waves-light"><i class="fa fa-times"></i>&nbsp; Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                
+}
+<script>
+    var Clinic = (function () {
+
+        var baseUrl = "";
+        var _fault = 0;
+        var _modification = 0;
+        var _dataCorrection = 0;
+        var _enhancement = 0;
+        var _optimization = 0;
+        var _other = 0;
+        var _total = 0;
+        var _Critical = 0;
+        var _Moderate = 0;
+        var _minor = 0;
+        var _ptotal = 0;
+
+        var init = function () {
+            Clinic.bindPageEvents();
+            Clinic.GetDays();
+            Clinic.GetTimeSlot();
+
+            var arrCountry = [];
+            arrCountry.push(new common.DropDown(0, "Country"));
+            common.FillDropDownListWithParem("ddlCountry", "", common.CommonURLs.GetDropDownData, arrCountry, "Country", "Error");
+
+            $('#ddlCountry').on('change', function () {
+                var arrState = [];
+                arrState.push(new common.DropDown($('#ddlCountry').val(), "Country"));
+                common.FillDropDownListWithParem("ddlState", "", common.CommonURLs.GetDropDownData, arrState, "State", "Error");
+            });
+
+            $('#ddlState').on('change', function () {
+                var arrCity = [];
+                arrCity.push(new common.DropDown($('#ddlCountry').val(), "Country"));
+                arrCity.push(new common.DropDown($('#ddlState').val(), "State"));
+                common.FillDropDownListWithParem("ddlCity", "", common.CommonURLs.GetDropDownData, arrCity, "City", "Error");
+            });
+
+
+            $("#txtFault").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val()!='') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val()!='') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val()!='') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val()!='') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+            
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtModification").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtDataCorrection").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtEnhancement").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtOptimization").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtOptimization").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+
+            $("#txtOthers").change(function () {
+                _total = 0;
+                if ($("#txtFault").val() != '') {
+                    _fault = $("#txtFault").val();
+                }
+                else { _fault = 0; }
+                if ($("#txtModification").val() != '') {
+                    _modification = $("#txtModification").val();
+                }
+                else { _modification = 0; }
+                if ($("#txtDataCorrection").val() != '') {
+                    _dataCorrection = $("#txtDataCorrection").val();
+                } else { _dataCorrection = 0; }
+                if ($("#txtEnhancement").val() != '') {
+                    _enhancement = $("#txtEnhancement").val();
+                } else { _enhancement = 0; }
+                if ($("#txtOptimization").val() != '') {
+                    _optimization = $("#txtOptimization").val();
+                } else { _optimization = 0; }
+                if ($("#txtOthers").val() != '') {
+                    _other = $("#txtOthers").val();
+                } else { _other = 0; }
+
+                _total = parseInt(_fault) + parseInt(_modification) + parseInt(_dataCorrection) + parseInt(_enhancement) + parseInt(_optimization) + parseInt(_other);
+                $("#txtHDTotal").val(_total);
+                common.SetFormLabel();
+
+
+            });
+            
+            $("#txtCritical").change(function () {
+                _ptotal = 0;
+                if ($("#txtCritical").val() != '') {
+                    _Critical = $("#txtCritical").val();
+                }
+                else { _Critical = 0; }
+                if ($("#txtModerate").val() != '') {
+                    _Moderate = $("#txtModerate").val();
+                }
+                else { _Moderate = 0; }
+                if ($("#txtMinor").val() != '') {
+                    _minor = $("#txtMinor").val();
+                } else { _minor = 0; }
+
+                _ptotal = parseInt(_Critical) + parseInt(_Moderate) + parseInt(_minor);
+                $("#txtPTotal").val(_ptotal);
+                common.SetFormLabel();
+
+
+            });
+            $("#txtModerate").change(function () {
+                _ptotal = 0;
+                if ($("#txtCritical").val() != '') {
+                    _Critical = $("#txtCritical").val();
+                }
+                else { _Critical = 0; }
+                if ($("#txtModerate").val() != '') {
+                    _Moderate = $("#txtModerate").val();
+                }
+                else { _Moderate = 0; }
+                if ($("#txtMinor").val() != '') {
+                    _minor = $("#txtMinor").val();
+                } else { _minor = 0; }
+
+                _ptotal = parseInt(_Critical) + parseInt(_Moderate) + parseInt(_minor);
+                $("#txtPTotal").val(_ptotal);
+                common.SetFormLabel();
+            });
+            $("#txtMinor").change(function () {
+                _ptotal = 0;
+                if ($("#txtCritical").val() != '') {
+                    _Critical = $("#txtCritical").val();
+                }
+                else { _Critical = 0; }
+                if ($("#txtModerate").val() != '') {
+                    _Moderate = $("#txtModerate").val();
+                }
+                else { _Moderate = 0; }
+                if ($("#txtMinor").val() != '') {
+                    _minor = $("#txtMinor").val();
+                } else { _minor = 0; }
+
+                _ptotal = parseInt(_Critical) + parseInt(_Moderate) + parseInt(_minor);
+                $("#txtPTotal").val(_ptotal);
+                common.SetFormLabel();
+
+
+            });
+
+            
+
+            //var id = common.GetParameterFromURL('ClinicID');
+            //if (id > 0) {
+            //    Clinic.GetClinicData(id);
+            //}
+
+            var id = $("#RecordNumber").val();
+            if (id > 0 && id != undefined && id != null && id != '') {
+                Clinic.GetClinicData();
+            }
+
+        };
+
+        var GetClinicData = function () {
+            URL = "/Clinic/GetClinicDetailByID?RequestVerificationToken=@Utility.TokenHeaderValue()";
+            $.ajax({
+                url: URL,
+                type: "GET",
+                dataType: 'json',
+                data: { "RecordNumber": $("#RecordNumber").val() },
+                async: false,
+                success: function (data) {
+                    if (data != 'Error') {
+                        console.log(data);
+                        Clinic.PopulateValue(data)
+                    } else {
+                        common.ErrorMessage(common.Message.Error);
+                    }
+                },
+                error: function () {
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+        }
+
+        var PopulateValue = function (data) {
+            debugger;
+            var id = $("#RecordNumber").val();
+            if (id > 0 && id != undefined && id != null && id != '') {
+                $("#RecordNumber").val(id);
+            }
+            else {
+                $("#RecordNumber").val(0);
+            }
+                $("#ddlProjectList").val(data[0]['Content_Type']);
+            $("#ddlClient").val(data[0]['ProjectName']);
+            $("#txtReleasePatchNumber").val(data[0]['Pro_Rel_Pat_number']);
+            $("#txtPlanCodeFreeze").val(common.toDate(data[0]['Plan_Codefreeze']));
+            $("#TxtPlanShipment").val(common.toDate(data[0]['plan_shipment']));
+            //$("#shipped").val(data[0]['shipped']);/////////////////
+            $("#txtJira").val(data[0]['jira_issue']);
+            $("#txtOptimization").val(data[0]['optimization']);
+            $("#txtTotalBuilds").val(data[0]['actual_build']);
+            $("#txtActualCodeFreeze").val(common.toDate(data[0]['actual_codefreeze']));
+            $("#TxtActualShipment").val(common.toDate(data[0]['actual_shipment']));
+            //$("#build_machine").val(data[0]['build_machine']);/////////////
+            //$("#client").val(data[0]['client']);//////////
+            $("#ddlStatus").val(data[0]['comments']);
+            //$("#created").val(data[0]['created']);  //////////////      
+            //$("#itemtype").val(data[0]['itemtype']);  ///////////      
+            //$("#path").val(data[0]['path']);/////////////
+            $("#txtInternalCRs").val(data[0]['internal_cr']);
+            $("#txtUAT").val(data[0]['uat_issue']);
+            $("#txtGAPs").val(data[0]['gaps']);
+            $("#txtFault").val(data[0]['fault']);
+            $("#txtModification").val(data[0]['modification']);
+            $("#txtDataCorrection").val(data[0]['datacorrection']);
+            $("#txtEnhancement").val(data[0]['enhacement']);
+            $("#txtOthers").val(data[0]['others']);
+            $("#txtHDTotal").val(data[0]['total_category_hd']);
+            $("#txtCritical").val(data[0]['crittical']);
+            $("#txtMinor").val(data[0]['minor']);
+            $("#txtModerate").val(data[0]['moderate']);
+            $("#txtPTotal").val(data[0]['total_priory_hd']);
+            $("#txtPlanCodeFreezeTime").val(data[0]['time_planned_code_freeze']);
+            $("#txtActualCodeFreezeTime").val(data[0]['time_actual_code_freeze']);
+            $("#TxtPlanShipmentTime").val(data[0]['time_planned_shipment']);
+            $("#TxtActualShipmentTime").val(data[0]['time_actual_shipment']);
+            $("#ddlPrimary").val(data[0]['primary_name']);
+            $("#ddlSecondary").val(data[0]['secondary_name']);
+            //$("#status").val(data[0]['status']);////////////
+            $("#txtEffort").val(data[0]['effor_hours']);
+            ////////////
+            common.SetFormLabel();
+        }
+
+        var GetTimeSlot = function () {
+            var arrTime = [];
+            arrTime.push(new common.DropDown(0, "Time"));
+            common.FillDropDownListWithParem("ddlStartTime", "", common.CommonURLs.GetDropDownData, arrTime, "Time", "Error");
+            common.FillDropDownListWithParem("ddlEndTime", "", common.CommonURLs.GetDropDownData, arrTime, "Time", "Error");
+        }
+
+        var GetDays = function () {
+            var arrDays = [];
+            arrDays.push(new common.DropDown(0, "Days"));
+            common.FillDropDownListWithParem("ddlCloseDay", "", common.CommonURLs.GetDropDownData, arrDays, "Days", "Error");
+        }
+
+        var ValidForm = function () {
+            var msg = '';
+            alertMsgFlag = true;
+
+            //var EmailID = $("#txtEmailID").val()
+            ////if (!common.ValidEmail(EmailID)) {
+            ////    alertMsgFlag = true;
+            ////    msg = msg + "- Email is Invalid. <br/>";
+            ////}
+
+            if (alertMsgFlag) {
+                bootbox.alert({ title: "Please provide value for following field(s):", message: msg });
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        var bindPageEvents = function () {
+
+
+            $("#SaveUpdateData").on("click", function () {
+                debugger;
+
+                var id = 0;
+                var tempId = $("#RecordNumber").val();
+                if (tempId != null && tempId > 0 && tempId != '' && tempId != undefined) {
+                    id = $("#RecordNumber").val();
+                }
+
+                var hdTotal = $("#txtHDTotal").val();
+                var pTotal = $("#txtPTotal").val();
+                if ($("txtActualCodeFreeze").val() <= $("TxtActualShipment").val()) {
+                    if (hdTotal == pTotal) {
+
+
+                        var data = {
+                            
+                            RecordNumber: id,
+                            Content_Type: $("#ddlProjectList").val(),
+                            ProjectName: $("#ddlClient").val(),
+                            Pro_Rel_Pat_number: $("#txtReleasePatchNumber").val(),
+                            Plan_Codefreeze: $("#txtPlanCodeFreeze").val(),
+                            plan_shipment: $("#TxtPlanShipment").val(),
+                            jira_issue: $("#txtJira").val(),
+                            optimization: $("#txtOptimization").val(),
+                            actual_build: $("#txtTotalBuilds").val(),
+                            actual_codefreeze: $("#txtActualCodeFreeze").val(),
+                            actual_shipment: $("#TxtActualShipment").val(),
+                            comments: $("#ddlStatus").val(),
+                            internal_cr: $("#txtInternalCRs").val(),
+                            uat_issue: $("#txtUAT").val(),
+                            gaps: $("#txtGAPs").val(),
+                            fault: $("#txtFault").val(),
+                            modification: $("#txtModification").val(),
+                            datacorrection: $("#txtDataCorrection").val(),
+                            enhacement: $("#txtEnhancement").val(),
+                            others: $("#txtOthers").val(),
+                            total_category_hd: $("#txtHDTotal").val(),
+                            crittical: $("#txtCritical").val(),
+                            minor: $("#txtMinor").val(),
+                            moderate: $("#txtModerate").val(),
+                            total_priory_hd: $("#txtPriorityTotal").val(),
+                            time_planned_code_freeze: $("#txtPlanCodeFreezeTime").val(),
+                            time_actual_code_freeze: $("#txtActualCodeFreezeTime").val(),
+                            time_planned_shipment: $("#TxtPlanShipmentTime").val(),
+                            time_actual_shipment: $("#TxtActualShipmentTime").val(),
+                            primary_name: $("#ddlPrimary").val(),
+                            secondary_name: $("#ddlSecondary").val(),
+                            // status:$("#status").val(),////////////
+                            effor_hours: $("#txtEffort").val()
+
+                            /////////////////////////////////
+                        }
+
+                        //var ID = $("#Clinic_ID").val();
+                        //var URL = "/Clinic/AddClinicIndformation/";
+
+                        //if (ID > 0) {
+                        //    URL = "/Clinic/UpdateClinicIndformation/";
+                        //}
+                        console.log(data);
+                        URL = "/Clinic/Saveupdateactivitysheet/";
+
+                        $.ajax({
+                            url: URL,
+                            type: "POST",
+                            //contentType: false,
+                            dataType: 'json',
+                            data: data,
+                            cache: false,
+                            async: true,
+                            success: function (data) {
+                                debugger;
+                                if (data == 'Success') {
+                                    common.SuccessMessage(common.Message.Success);
+                                    common.ResetForm();
+                                    common.SetFormLabel();
+                                } else {
+                                    common.ErrorMessage(common.Message.Error);
+                                }
+                            },
+                            error: function () {
+                                common.ErrorMessage(common.Message.Error)
+                            }
+                        });
+                    }
+                    else {
+                        common.ErrorMessage("Kindly Check the HD total must be equal to Priority Total")
+                    }
+                }
+                else {
+                    common.ErrorMessage("Code Freeze Date must be less than Shipment Date")
+                }
+            });
+
+
+            $("#deleteClinic").on("click", function () {
+                var ClinicID = $("#Clinic_ID").val();
+
+                if (ClinicID > 0) {
+                    common.ConfirmBox(function (result) {
+                        if (result) {
+
+                            $.ajax({
+                                url: '/Clinic/DeleteClinic/',
+                                type: "POST",
+                                data: JSON.stringify({ ClinicID: ClinicID }),
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                async: false,
+                                success: function (data) {
+                                    if (data != false) {
+                                        common.SuccessMessage(common.Message.Delete);
+                                        common.ResetForm();
+                                        common.SetFormLabel();
+                                    }
+                                    else {
+                                        common.ErrorMessage(common.Message.Error)
+                                    }
+                                },
+                                error: function (data) {
+                                    //alert(data);
+                                    ShowErrorMsg('error', data, 'client', FTPConfigFormId);
+                                }
+                            });
+
+                        }
+
+                    }, common.Message.Confirm);
+                }
+
+                else {
+                    bootbox.alert("Please select record(s) to delete.");
+                }
+
+            });
+        };
+
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            ValidForm: ValidForm,
+            GetClinicData: GetClinicData,
+            PopulateValue: PopulateValue,
+            GetDays: GetDays,
+            GetTimeSlot: GetTimeSlot
+        };
+    })();
+
+    $(document).ready(function () {
+        Clinic.init();
+        //File Upload
+        $(".fileinput-upload-button").hide();
+
+        //File Drop and Upload
+        $('.dropify').dropify();
+
+        //File Drop and Upload Used events
+        var drEvent = $('#input-file-events').dropify();
+
+        drEvent.on('dropify.beforeClear', function (event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+
+        drEvent.on('dropify.afterClear', function (event, element) {
+            alert('File deleted');
+        });
+
+        drEvent.on('dropify.errors', function (event, element) {
+            console.log('Has Errors');
+        });
+
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function (e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        });
+    })
+</script>

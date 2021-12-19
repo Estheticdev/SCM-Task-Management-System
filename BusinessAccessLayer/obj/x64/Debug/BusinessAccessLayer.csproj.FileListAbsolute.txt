@@ -1,0 +1,17 @@
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\BusinessAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\BusinessAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\Commons.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\DataAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.WebPages.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\Microsoft.Web.Infrastructure.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.Razor.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.WebPages.Deployment.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\Commons.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\DataAccessLayer.pdb
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.WebPages.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\Microsoft.Web.Infrastructure.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.Razor.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\bin\x64\Debug\System.Web.WebPages.Deployment.xml
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\x64\Debug\BusinessAccessLayer.csprojResolveAssemblyReference.cache
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\x64\Debug\BusinessAccessLayer.dll
+E:\Learning\AppointmentManagementSystem\BusinessAccessLayer\obj\x64\Debug\BusinessAccessLayer.pdb

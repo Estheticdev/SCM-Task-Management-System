@@ -1,0 +1,239 @@
+﻿@{
+    Layout = null;
+}
+@{
+    var formName = (Int32)Commons.Enums.ScreenID.LoginUser;
+}
+<!DOCTYPE html> 
+<html lang="zxx">
+
+<head>
+    @*<link rel="icon" type="image/png" sizes="16x16" href="~/Content/Images/FatimaComplex_Logo.png">*@
+    <title>SCM Task Management System&reg;</title>
+    <!-- custom-theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Esthetic Developers Expense Management System." />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } 
+    </script>
+    
+    @Styles.Render("~/Content/LoginCSS/css")
+    @Scripts.Render("~/bundles/LoginScripts")
+    <link href="~/Content/ApplicationCSS/animate.css" rel="stylesheet" />
+    <script src="~/Scripts/ApplicationScripts/bootstrap-notify.js"></script>
+    <script src="~/Scripts/ApplicationScripts/bootstrap-notify.min.js"></script>
+    <script src="~/Scripts/ActionScripts/LoginScripts.js"></script>
+
+    <!--fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+    <!--//fonts-->
+</head>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = formName, id = formName }))
+{
+
+<body id="loginBody">
+    <!-- Header -->
+    <div id="home" class="banner w3l">
+        <div class="header-nav">
+            <nav class="navbar navbar-default">
+                <div class="header-top">
+                    <div class="navbar-header logo">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1>
+                            @*<a class="navbar-brand logo"  href="#">
+                                <img src="~/Content/Images/medical-logo-png.png" height="100" width="100" class="imgLogo" />
+                                <i aria-hidden="true"></i> <span style="font-family:Pristina">Health</span> 
+                                <br />
+                            </a>*@
+                        </h1>
+                    </div>
+                    <!-- navbar-header -->
+                    <div class="contact-bnr-w3-agile">
+                        <ul>
+                            <li>
+                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                <a href="mailto:info@example.com">ntpk.scm@netsoltech.com</a>
+                            </li>
+                            @*<li>
+                                <i class="fa fa-phone" aria-hidden="true"></i>(+92) 42 37335658
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+                @*<div class="collapse navbar-collapse cl-effect-13" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="@Url.Action("LoginUser","Login")" class="active">Home</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/aboutus.html">About</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/services.html">Services</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/product.html">Products</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/gallery.html">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/contact.html">Contact</a>
+                        </li>
+                        <li>
+                            <a href="http://estheticdeveloper.com/index.html">Visit Site</a>
+                        </li>
+                    </ul>
+
+                </div>*@
+                <div class="clearfix"> </div>
+            </nav>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="container">
+            <div class="banner-info wow bounceInDown" data-wow-duration="1s" data-wow-delay="0s">
+                <div class="callbacks_container">
+                    <div class="col-sm-6">
+                        <ul class="rslides" id="slider3">
+                            <li>
+                                <div class="banner-text">
+                                    <h3>Congratulation </h3>
+                                    <h4>Employee Name</h4>
+                                    <p>Work Anniversary / Birthday</p>
+                                 </div>
+                            </li>
+                            <li>
+                                <div class="banner-text">
+                                    <h3>Best Employee</h3>
+                                    <h4>Employee Name</h4>
+                                    <p>Some COmments</p>
+                                 </div>
+                            </li>
+                            @*<li>
+                                <div class="banner-text">
+                                    <h3>Way to succeed in</h3>
+                                    <h4>Business</h4>
+                                    <p>Reduce the chances of any ambiguity.We increase your confidence with your business</p>
+                                    <div class="more-button">
+                                        <a href="#" data-toggle="modal" data-target="#myModal1">Read More</a>
+                                    </div>
+                                </div>
+                            </li>*@
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="rslides" id="slider3">
+                            <li>
+                                <div class="banner-text">
+                                    <div class="videologin col-sm-12">
+                                        <div class="icon1">
+                                            <i class="fa fa-user" aria-hidden="false"></i>
+                                            <input type="text" placeholder="User Name" id="userName" name="userName" required="">
+                                        </div>
+                                        <div class="icon1">
+                                            <i class="fa fa-unlock-alt" aria-hidden="false"></i>
+                                            <input type="password" placeholder="Password" id="password" name="password" required="">
+                                        </div>
+                                        <div class="bottom" style="text-align:right;">
+                                            <a @*href="@Url.Action("ForgetPassword","Login")"*@>Forget your password?</a>
+                                        </div>
+                                        <div class="bottom" style="text-align:right;">
+                                            <input type="submit" value="Signin" onclick="return Login.LoginUser();">
+
+                                            @*<button type="button" class="btn btn-primary btn-block" id="btnClear" onclick="LoginUser();">Sign in</button>*@
+                                        </div>
+                                        <div class="bottom" style="text-align:left;">
+                                            @*<a href="@Url.Action("LoginUser", "Login")">Register Now!?</a>*@
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow 4
+            $("#slider3").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!--//Scrolling-top -->
+    <!--flexiselDemo1 -->
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 2,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 1
+                    },
+                    tablet: {
+                        changePoint: 991,
+                        visibleItems: 1
+                    }
+                }
+            });
+
+        });
+    </script>
+    <!--//flexiselDemo1 -->
+    <!-- smooth scrolling -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            //$("#loginBody").bind("mousewheel", function () {
+            //    return false;
+            //});
+        });
+    </script>
+    <a href="#home" id="toTop" style="display: block;">
+        <span id="toTopHover" style="opacity: 1;"> </span>
+    </a>
+</body>
+}
+</html>

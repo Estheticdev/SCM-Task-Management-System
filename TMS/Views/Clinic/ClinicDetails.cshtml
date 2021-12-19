@@ -1,0 +1,150 @@
+﻿@using Commons;
+@{
+    ViewBag.Title = "Clinic Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32) Enums.ScreenID.ClinicDetail;
+}
+
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/ClinicDetailScripts.js"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">Clinic Details</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Clinic</a></li>
+                            <li class="breadcrumb-item active">Clinic Details</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card FirstCard">
+                        <div class="card-body ">
+                            <h4 class="card-title">Clinic Detail</h4>
+                            <h6 class="card-subtitle">You can view, edit or delete clinic.</h6>
+                            <div class="table-responsive m-t-40" style="overflow:auto">
+                                <table id="TableClinicDetail" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">ID</th>
+                                            <th>Name</th>
+                                            <th>Acronym</th>
+                                            <th>NTN</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Website</th>
+                                            <th hidden="hidden">Country</th>
+                                            <th hidden="hidden">State</th>
+                                            <th hidden="hidden">City</th>
+                                            <th hidden="hidden">Address</th>
+                                            <th hidden="hidden">Discription</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">ID</th>
+                                            <th>Name</th>
+                                            <th>Acronym</th>
+                                            <th>NTN</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Website</th>
+                                            <th hidden="hidden">Country</th>
+                                            <th hidden="hidden">State</th>
+                                            <th hidden="hidden">City</th>
+                                            <th hidden="hidden">Address</th>
+                                            <th hidden="hidden">Discription</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var ClinicDetail = (function () {
+        var init = function () {
+            ClinicDetail.GetClinicData();
+        };
+
+        var URL = "/Clinic/GetClinicDetail?RequestVerificationToken=@Utility.TokenHeaderValue()";
+        var table;
+        var GetClinicData = function () {
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="ClinicDetail.EditRecord(this);"><i class="fa fa-edit" title="Edit"></i></a> &nbsp;<a class="editor_view" onclick="ClinicDetail.ViewRecord(this);"><i class="editor_view fa fa-eye" title="View"></i></a>'
+                },
+                //{ "mDataProp": "Clinic_ID", "visible": false },
+                { "mDataProp": "Clinic_ID", "visible": false },
+                { "mDataProp": "Name" },
+                { "mDataProp": "Acronym" },
+                { "mDataProp": "NTN_Number" },
+                { "mDataProp": "Contact" },
+                { "mDataProp": "Email" },
+                { "mDataProp": "Website" },
+                { "mDataProp": "Country", "visible": false },
+                { "mDataProp": "State", "visible": false },
+                { "mDataProp": "City", "visible": false },
+                { "mDataProp": "Address", "visible": false },
+                { "mDataProp": "Discription", "visible": false },
+            ];
+
+            common.GridView('TableClinicDetail', URL, Col);
+            ClinicDetail.table = $("#TableClinicDetail").DataTable();
+        };
+
+        var ViewRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = ClinicDetail.table.row($(tr)).data();
+            var id = getCell["Clinic_ID"];
+            var URL = '/Clinic/ViewClinic?&ClinicID=' + id +'&RequestVerificationToken=@Utility.TokenHeaderValue()'
+            common.openBSModelPopupLvl1(URL, 'large', 'Clinic Detail');
+        }
+
+        var EditRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = ClinicDetail.table.row($(tr)).data();
+            var id = getCell["Clinic_ID"];
+            var URL = '/Clinic/ViewClinic?&ClinicID=' + id + '&RequestVerificationToken=@Utility.TokenHeaderValue()'
+            window.location.href = "/Clinic/AddEditClinic?RequestVerificationToken=@Utility.TokenHeaderValue()" +"&ClinicID=" + id;
+        }
+
+        return {
+            init: init,
+            GetClinicData: GetClinicData,
+            table: table,
+            ViewRecord: ViewRecord,
+            EditRecord: EditRecord,
+        };
+    })();
+
+    $(document).ready(function () {
+        $('#TableClinicDetail_length label select').removeClass('form-control');
+        $('#TableClinicDetail_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+
+        ClinicDetail.init();
+    });
+</script>

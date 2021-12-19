@@ -1,0 +1,410 @@
+﻿@using Commons;
+@{
+    ViewBag.Title = "Staff Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32)Commons.Enums.ScreenID.StaffInformation;
+}
+
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/StaffInformationScripts.js"></script>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">Administrator</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrator</a></li>
+                            <li class="breadcrumb-item active">Staff Information</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                        <input type="hidden" id="hdnClinicCode" name="hdnClinicCode" value="@Constants.ClinicCode" />
+                        <input type="hidden" id="hdnStaffID" name="hdnStaffID" value="0" />
+                        <input type="hidden" id="hdnActive" name="hdnActive" value="0" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card FirstCard">
+                        <div class="card-body">
+                            <h4 class="card-title">Staff Detail</h4>
+                            <h6 class="card-subtitle">You can view, edit or Staff Member.</h6>
+                            <div class="table-responsive" style="overflow:auto">
+                                <table id="TableStaffInformation" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">ID</th>
+                                            <th hidden="hidden">First Name</th>
+                                            <th hidden="hidden">Middle Name</th>
+                                            <th hidden="hidden">Last Name</th>
+                                            <th>Name</th>
+                                            <th hidden="hidden">Gender ID</th>
+                                            <th>Gender</th>
+                                            <th hidden="hidden">Marital Status ID</th>
+                                            <th>Marital Status</th>
+                                            <th>CNIC No.</th>
+                                            <th>Cell No.</th>
+                                            <th>Email</th>
+                                            <th hidden="hidden">Address</th>
+                                            <th>Status</th>
+                                            <th hidden="hidden">Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Staff Information</h5>
+                            <h6 class="card-subtitle">Provide your Staff Information Here.</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtFirstkName" name="txtFirstkName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtFirstkName">First Name</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtMiddleName" name="txtMiddleName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtMiddleName">Middle Name</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtLastName" name="txtLastName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtLastName">Last Name</label>
+                                </div>
+                                <div class="col-lg-3 form-group ">
+                                    <select class="form-control floating-Select clearText" id="ddlGender">
+                                        <option></option>
+                                    </select><span class="bar"></span>
+                                    <label for="ddlGender">Gender</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group">
+                                    <select class="form-control floating-Select resetDDL" id="ddlMaritalStatus">
+                                        <option></option>
+                                    </select><span class="bar"></span>
+                                    <label for="ddlMaritalStatus">Marital Status</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtCellNo" name="txtCellNo" class="form-control floating-Input CellNoMasking clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtCellNo">Cell No.</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="text" id="txtEmail" name="txtEmail" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtEmail">Email</label>
+                                </div>
+                                <div class="col-lg-3 form-group ">
+                                    <input type="text" id="txtCNIC" name="txtCNIC" class="form-control floating-Input CnicNoMasking clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtCNIC">CNIC No.</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 form-group">
+                                    <textarea class="form-control floating-TextArea clearText" rows="2" id="txtAddress"></textarea>
+                                    <span class="bar"></span>
+                                    <label for="txtAddress">Address</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div style="text-align: right;" class="card-body">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-12"></div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="addEditStaff" class="btn-custom btn btn-success waves-effect waves-light">Save</button>
+                                </div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="cancelStaff" class="btn-custom btn btn-inverse waves-effect waves-light">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var StaffInformation = (function () {
+        var init = function () {
+            StaffInformation.bindPageEvents();
+            StaffInformation.GetStaffData();
+
+            var arrGender = [];
+            arrTime.push(new common.DropDown($('#hdnClinicCode').val(), "ClinicCode"));
+            common.FillDropDownListWithParem("ddlGender", "", common.CommonURLs.GetDropDownData, arrGender, "Gender", "Error");
+
+            var arrMaritalStatus = [];
+            arrTime.push(new common.DropDown($('#hdnClinicCode').val(), "ClinicCode"));
+            common.FillDropDownListWithParem("ddlMaritalStatus", "", common.CommonURLs.GetDropDownData, arrMaritalStatus, "MaritalStatus", "Error");
+        };
+
+        var ValidForm = function () {
+            var msg = '';
+            alertMsgFlag = false;
+
+            var FirstName = $("#txtFirstkName").val()
+            if (FirstName == '' || FirstName == null) {
+                alertMsgFlag = true;
+                msg = msg + "- First Name <br/>";
+            }
+
+            var LastName = $("#txtLastName").val()
+            if (LastName == '' || LastName == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Last Name <br/>";
+            }
+
+            var Gender = $("#ddlGender").val()
+            if (Gender == '' || Gender == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Gender <br/>";
+            }
+
+            var MaritalStatus = $("#ddlMaritalStatus").val()
+            if (MaritalStatus == '' || MaritalStatus == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Marital Status <br/>";
+            }
+
+            var CNIC = $("#txtCNIC").val()
+            if (CNIC == '' || CNIC == null) {
+                alertMsgFlag = true;
+                msg = msg + "- CNIC No. <br/>";
+            }
+
+            var Cell = $("#txtCellNo").val()
+            if (Cell == '' || Cell == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Cell No. <br/>";
+            }
+
+            var EmailID = $("#txtEmail").val()
+            if (EmailID == '' || EmailID == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Email <br/>";
+            }
+
+            var Email = $("#txtEmail").val()
+            if (Email != '' && Email != null) {
+                if (!common.ValidEmail(Email)) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Email is Invalid. <br/>";
+                }
+            }
+
+            var Address = $("#txtAddress").val()
+            if (Address == '' || Address == null) {
+                alertMsgFlag = true;
+                msg = msg + "- Address <br/>";
+            }
+
+            if (alertMsgFlag) {
+                bootbox.alert({ title: "Please provide value for following field(s):", message: msg });
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        var bindPageEvents = function () {
+            $("#addEditStaff").on("click", function () {
+                debugger;
+                if (StaffInformation.ValidForm()) {
+                    debugger;
+
+                    var data = {
+                        Staff_ID: $("#hdnStaffID").val(),
+                        First_Name: $("#txtFirstkName").val(),
+                        Middle_Name: $("#txtMiddleName").val(),
+                        Last_Name: $("#txtLastName").val(),
+                        Gender: $("#ddlGender").val(),
+                        Marital_Status: $("#ddlMaritalStatus").val(),
+                        Email: $("#txtEmail").val(),
+                        CNIC_No: $("#txtCNIC").val(),
+                        Cell_No: $("#txtCellNo").val(),
+                        Address: $("#txtAddress").val()
+                    }
+
+                    var ID = $("#hdnStaffID").val();
+                    var URL = "/Admin/SaveStaffInformation/";
+
+                    if (ID > 0) {
+                        URL = "/Admin/UpdateStaffInformation/";
+                    }
+
+                    $.ajax({
+                        url: URL,
+                        type: "POST",
+                        //contentType: false,
+                        dataType: 'json',
+                        data: data,
+                        cache: false,
+                        async: true,
+                        success: function (data) {
+                            debugger;
+                            if (data == 'Success') {
+                                common.SuccessMessage(common.Message.Success);
+                                common.ResetForm();
+                                common.SetFormLabel();
+                                StaffInformation.GetStaffData();
+                                $("#hdnStaffID").val(0);
+                            } else {
+                                common.ErrorMessage(common.Message.Error);
+                            }
+                        },
+                        error: function () {
+                            common.ErrorMessage(common.Message.Error)
+                        }
+                    });
+                };
+            });
+
+            $("#cancelStaff").on("click", function () {
+                common.ResetForm();
+                common.SetFormLabel();
+                $("#hdnStaffID").val(0);
+                StaffInformation.GetStaffData();
+            });
+        };
+
+        var URL = "/Admin/GetStaffInformation?RequestVerificationToken=@Utility.TokenHeaderValue()";
+        var table;
+        var GetStaffData = function () {
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="StaffInformation.EditRecord(this);"><i class="fa fa-edit" title="Edit"></i></a>&nbsp;<a class="editor_remove" onclick="StaffInformation.DeleteRecord(this);"><i class="fa fa-trash-alt" title="Delete"></i></a>'
+                },
+                { "mDataProp": "Staff_ID", "visible": false },
+                { "mDataProp": "First_Name", "visible": false },
+                { "mDataProp": "Middle_Name", "visible": false },
+                { "mDataProp": "Last_Name", "visible": false },
+                { "mDataProp": "Full_Name" },
+                { "mDataProp": "Gender", "visible": false },
+                { "mDataProp": "Gender_Name" },
+                { "mDataProp": "Marital_Status", "visible": false },
+                { "mDataProp": "Marital_Status_Name" },
+                { "mDataProp": "CNIC_No" },
+                { "mDataProp": "Cell_No" },
+                { "mDataProp": "Email" },
+                { "mDataProp": "Address", "visible": false },
+                { "mDataProp": "Active" },
+                { "mDataProp": "ClinicCode", "visible": false },
+            ];
+
+            common.GridView('TableStaffInformation', URL, Col);
+            StaffInformation.table = $("#TableStaffInformation").DataTable();
+            $('#TableStaffInformation_length label select').removeClass('form-control');
+            $('#TableStaffInformation_length label select').removeClass('form-control-sm');
+            $('.bottom div').removeClass('row');
+            $('.bottom div').addClass('Botton-row');
+        };
+
+        var EditRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = StaffInformation.table.row($(tr)).data();
+            $("#hdnStaffID").val(getCell["Staff_ID"]),
+            $("#txtFirstkName").val(getCell["First_Name"]),
+            $("#txtMiddleName").val(getCell["Middle_Name"]),
+            $("#txtLastName").val(getCell["Last_Name"]),
+            $("#ddlGender").val(getCell["Gender"]),
+            $("#ddlMaritalStatus").val(getCell["Marital_Status"]),
+            $("#txtCNIC").val(getCell["CNIC_No"])
+            $("#txtCellNo").val(getCell["Cell_No"])
+            $("#txtEmail").val(getCell["Email"])
+            $("#txtAddress").val(getCell["Address"])
+            $("#hdnActive").val(getCell["Active"])
+
+            common.SetFormLabel();
+        }
+
+        var DeleteRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = StaffInformation.table.row($(tr)).data();
+            var Id = getCell["Staff_ID"];
+
+            if (Id > 0) {
+                common.ConfirmBox(function (result) {
+                    if (result) {
+
+                        $.ajax({
+                            url: '/Admin/DeleteStaffInformation/',
+                            type: "POST",
+                            data: JSON.stringify({ ID: Id }),
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            async: false,
+                            success: function (data) {
+                                if (data != false) {
+                                    common.SuccessMessage(common.Message.Delete);
+                                    StaffInformation.GetStaffData();
+                                    common.SetFormLabel();
+                                    $("#hdnStaffID").val(0);
+                                }
+                                else {
+                                    common.ErrorMessage(common.Message.Error)
+                                }
+                            },
+                            error: function (data) {
+                                //alert(data);
+                                ShowErrorMsg('error', data, 'client', FTPConfigFormId);
+                            }
+                        });
+
+                    }
+
+                }, common.Message.Confirm);
+            }
+
+            else {
+                bootbox.alert("Please select record(s) to delete.");
+            }
+        }
+
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            ValidForm: ValidForm,
+            GetStaffData: GetStaffData,
+            EditRecord: EditRecord,
+            DeleteRecord: DeleteRecord
+        };
+    })();
+
+    $(document).ready(function () {
+        StaffInformation.init();
+        $('#TableStaffInformation_length label select').removeClass('form-control');
+        $('#TableStaffInformation_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+    });
+</script>
+

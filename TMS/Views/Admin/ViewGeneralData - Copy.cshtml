@@ -1,0 +1,42 @@
+﻿@using Commons;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View Data</title>
+    @Styles.Render("~/Content/ApplicationCSS")
+    @Styles.Render("~/Content/ScreenCSS")
+    <script src="~/Scripts/ActionScripts/ViewGeneralData.js"></script>
+</head>
+<body>
+    <form id="@Convert.ToInt32(Enums.ScreenID.ViewPatient)">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <input type="hidden" id="hdnDataType"  value="@Request.QueryString["GeneralType"]" />
+                    <div class="table-responsive" style="overflow:auto; height: 210px">
+                        <table id="TableGeneralSetups" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th hidden="hidden">ID</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+@Scripts.Render("~/bundles/ApplicationScripts")
+@Scripts.Render("~/bundles/ScreenScripts")

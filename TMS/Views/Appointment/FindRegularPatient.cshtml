@@ -1,0 +1,182 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var formName = (Int32)Commons.Enums.ScreenID.FindRegularPatient;
+}
+@Styles.Render("~/Content/ApplicationCSS")
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ApplicationScripts")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/FindRegularPatient.js"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="card">
+        <div class="card-body Custom-Card-Body">
+            @*<h4 class="card-title">Searching Filters</h4>
+                <h6 class="card-subtitle">Use These Filters To Find The Regular Patient.</h6>*@
+            <div class="row">
+                <div class="col-lg-3 form-group FirstCard">
+                    <input type="text" id="txtFindFullName" name="txtFindFullName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                    <span class="bar"></span>
+                    <label for="txtFindFullName">Full Name</label>
+                </div>
+                <div class="col-lg-3 form-group FirstCard">
+                    <input type="text" id="txtFindPatientContact" name="txtFindPatientContact" class="form-control floating-Input PhoneNoMasking clearText" value="">
+                    <span class="bar"></span>
+                    <label for="txtFindPatientContact">Contact Number</label>
+                </div>
+                <div class="col-lg-3 form-group FirstCard">
+                    <input type="text" id="txtFindPatientEmailID" name="txtFindPatientEmailID" class="form-control floating-Input clearText" value="">
+                    <span class="bar"></span>
+                    <label for="txtFindPatientEmailID">Email</label>
+                </div>
+                <div class="col-lg-3 form-group FirstCard">
+                    <input type="text" id="txtFindPatientCNIC" name="txtFindPatientCNIC" class="form-control floating-Input CnicNoMasking clearText" value="">
+                    <span class="bar"></span>
+                    <label for="txtFindPatientCNIC">CNIC Number.</label>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div style="text-align: right; padding-bottom:0.5em; padding-top:0.5em;" class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12"></div>
+                            <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                            <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                <button type="button" id="findPatient" class="btn-custom btn btn-info waves-effect waves-light">Find</button>
+                            </div>
+                            <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                <button type="button" id="cancelRecords" class="btn-custom btn btn-inverse waves-effect waves-light">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body Custom-Card-Body">
+                        @*<h4 class="card-title">Clinic Detail</h4>
+                            <h6 class="card-subtitle">You can view, edit or delete clinic.</h6>*@
+                        <div class="table-responsive" style="overflow:auto">
+                            <table id="TableFindRegularPatient" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th hidden="hidden">ID</th>
+                                        <th>Name</th>
+                                        <th hidden="hidden">DOB</th>
+                                        <th hidden="hidden">Blood ID</th>
+                                        <th hidden="hidden">Blood Group</th>
+                                        <th>CNIC</th>
+                                        <th>Contact</th>
+                                        <th>Email</th>
+                                        <th hidden="hidden">City ID</th>
+                                        <th>City</th>
+                                        <th hidden="hidden">Discription</th>
+                                        <th hidden="hidden">Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+<script>
+    var FindRegularPatient = (function () {
+        var init = function () {
+            FindRegularPatient.bindPageEvents();
+        };
+
+        var bindPageEvents = function () {
+            $("#findPatient").on("click", function () {
+                var name = $("#txtFindFullName").val();
+                var contact = $("#txtFindPatientContact").val();
+                var email = $("#txtFindPatientEmailID").val();
+                var cnic = $("#txtFindPatientCNIC").val();
+
+                FindRegularPatient.FindPatientData(name, cnic, contact, email);
+            });
+        };
+
+
+
+        var table;
+        var FindPatientData = function (Name, CNIC, Contact, Email) {
+            debugger;
+            var URL = "/Appointment/FindRegularPatientData?Name=" + Name + '&CNIC=' + CNIC + '&Contact=' + Contact + '&Email=' + Email;
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="FindRegularPatient.SetAppointment(this);"><i title="Schedule Appointment" class="fa fa-calendar-check"></i></a>'
+                },
+
+                { "mDataProp": "Patient_ID", "visible": false },
+                { "mDataProp": "Patient_Name" },
+                { "mDataProp": "DOB", "visible": false },
+                { "mDataProp": "Blood_Group_ID", "visible": false },
+                { "mDataProp": "Blood_Group_Name", "visible": false },
+                { "mDataProp": "CNIC" },
+                { "mDataProp": "Contact" },
+                { "mDataProp": "Email" },
+                { "mDataProp": "City_ID", "visible": false },
+                { "mDataProp": "City_Name" },
+                { "mDataProp": "Discription", "visible": false },
+                { "mDataProp": "Address", "visible": false },
+            ];
+
+            common.GridView('TableFindRegularPatient', URL, Col);
+            FindRegularPatient.table = $("#TableFindRegularPatient").DataTable();
+            $('#TableFindRegularPatient_length label select').removeClass('form-control');
+            $('#TableFindRegularPatient_length label select').removeClass('form-control-sm');
+            $('.bottom div').removeClass('row');
+            $('.bottom div').addClass('Botton-row');
+        };
+
+        var SetAppointment = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = FindRegularPatient.table.row($(tr)).data();
+            $('#hdnPatientID').val(getCell["Patient_ID"]);
+            $('#txtFullName').val(getCell["Patient_Name"]);
+            $('#dtpPatientAge').val(common.toDate(getCell["DOB"]));
+            $('#ddlPatientBloodGroup').val(getCell["Blood_Group_ID"]);
+            $('#txtPatientCNIC').val(getCell["CNIC"]);
+            $('#txtPatientContact').val(getCell["Contact"]);
+            $('#txtPatientEmailID').val(getCell["Email"]);
+            $('#ddlCity').val(getCell["City_ID"]);
+            $('#txtDiscription').val(getCell["Discription"]);
+            $('#txtAddress').val(getCell["Address"]);
+            common.SetFormLabel();
+            common.ClosePopupLvl1Button()
+            $('.bookAppointment').prop('disabled', true);
+        }
+
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            FindPatientData: FindPatientData,
+            SetAppointment: SetAppointment
+        };
+    })();
+
+    $(document).ready(function () {
+
+        FindRegularPatient.init();
+        $(".modal-body").children("div").hide();
+        $(".modal-body").children("footer").hide();
+
+        $(".modal-body").addClass('PopUp-BackGround');
+        $('#TableFindRegularPatient_length label select').removeClass('form-control');
+        $('#TableFindRegularPatient_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+    });
+</script>

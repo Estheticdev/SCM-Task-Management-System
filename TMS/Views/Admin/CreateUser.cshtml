@@ -1,0 +1,544 @@
+﻿@using Commons;
+@{
+    ViewBag.Title = "Create User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32)Commons.Enums.ScreenID.CreateUser;
+}
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/CreateUserScripts.js"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">Administrator</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrator</a></li>
+                            <li class="breadcrumb-item active">Create User</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                        <input type="hidden" id="hdnClinicCode" name="hdnClinicCode" value="@Constants.ClinicCode" />
+                        <input type="hidden" id="hdnUserID" name="hdnUserID" value="0" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card FirstCard">
+                        <div class="card-body">
+                            <h4 class="card-title">User Detail</h4>
+                            <h6 class="card-subtitle">You can view, edit or delete User.</h6>
+                            <div class="table-responsive" style="overflow:auto">
+                                <table id="TableUserDetail" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th hidden="hidden">ID</th>
+                                            <th hidden="hidden">Type ID</th>
+                                            <th>User Type</th>
+                                            <th hidden="hidden">Member ID</th>
+                                            <th>Name</th>
+                                            <th>User Name</th>
+                                            <th hidden="hidden">Super_Admin_ID</th>
+                                            <th>Super Admin</th>
+                                            <th hidden="hidden">Status ID</th>
+                                            <th>Status</th>
+                                            <th hidden="hidden">Code</th>
+                                            <th hidden="hidden">Created Date</th>
+                                            <th hidden="hidden">Created By</th>
+                                            <th hidden="hidden">Modified Date</th>
+                                            <th hidden="hidden">Modified By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User Information</h5>
+                            <h6 class="card-subtitle">Create User Here to Access the Application.</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-3 form-group">
+                                    <select class="form-control floating-Select clearText" id="ddlUserType">
+                                        <option></option>
+                                    </select><span class="bar"></span>
+                                    <label for="ddlUserType">User Type</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <select class="form-control floating-Select clearText" id="ddlMember">
+                                        <option></option>
+                                    </select><span class="bar"></span>
+                                    <label id="lblStaffMember" for="ddlMember">Staff Member</label>
+                                </div>
+                                <div class="col-lg-3 form-group ">
+                                    <input type="text" id="txtUserName" name="txtUserName" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtUserName">User Name</label>
+                                </div>
+                                <div class="col-lg-3 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkAdmin" required="" class="custom-control-input resetCheckbox" id="chkAdmin" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkAdmin">Super Admin</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group">
+                                    <input type="password" id="txtPassword" name="txtPassword" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtWebsite">Password</label>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <input type="password" id="txtConfirmPassword" name="txtConfirmPassword" class="form-control floating-Input clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtConfirmPassword">Confirm Password</label>
+                                </div>
+                                <div class="col-lg-3 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkUserActive" required="" class="custom-control-input resetCheckbox" id="chkUserActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkUserActive">Active</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div style="text-align: right;" class="card-body">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-12"></div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="addEditUser" class="btn-custom btn btn-success waves-effect waves-light">Save</button>
+                                </div>
+                                <div class="btn-p col-lg-2 col-md-2 col-sm-12">
+                                    <button type="button" id="cancelUser" class="btn-custom btn btn-inverse waves-effect waves-light">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    var CreateUser = (function () {
+        var init = function () {
+            CreateUser.bindPageEvents();
+            CreateUser.GetUserData();
+
+            //var DropDownUserType = {
+            //    ID: 0,
+            //    Value: "UserType"
+            //}
+            //var arrUserType = [];
+            //arrUserType[0] = DropDownUserType;
+            //common.FillDropDownListWithParem("ddlUserType", "", common.CommonURLs.GetDropDownData, arrUserType, "UserType", "Error");
+
+            var arrUserType = [];
+            arrTime.push(new common.DropDown(0, "UserType"));
+            common.FillDropDownListWithParem("ddlUserType", "", common.CommonURLs.GetDropDownData, arrUserType, "UserType", "Error");
+        };
+
+        var ValidForm = function () {
+            var msg = '';
+            alertMsgFlag = false;
+
+            var UserType = $("#ddlUserType").val()
+            if (UserType == '' || UserType == null) {
+                alertMsgFlag = true;
+                msg = msg + "- User Type <br/>";
+            }
+
+            var member = $("#ddlMember").val()
+            var text = $("#lblStaffMember").text()
+            if (text == 'Doctor' && (member == '' || member == null)) {
+                alertMsgFlag = true;
+                msg = msg + "- Doctor <br/>";
+            }
+
+            if (text == 'Staff Member' && (member == '' || member == null)) {
+                alertMsgFlag = true;
+                msg = msg + "- Staff Member <br/>";
+            }
+
+            var userName = $("#txtUserName").val()
+            if (userName == '' || userName == null) {
+                alertMsgFlag = true;
+                msg = msg + "- User Name <br/>";
+            }
+
+            var id = $("#hdnUserID").val();
+            var password = $("#txtPassword").val()
+            var confirmPassword = $("#txtConfirmPassword").val()
+            var update = false;
+            if (id > 0) {
+                //alert(id);
+                //alert(password);
+                //alert(confirmPassword);
+                if (password != '' && password != null) {
+                    update = true;
+                }
+
+                if (confirmPassword != '' && confirmPassword != null) {
+                    update = true;
+                }
+                //alert(update);
+                if (update) {
+                    if (password == '' || password == null) {
+                        alertMsgFlag = true;
+                        msg = msg + "- Password. <br/>";
+                    }
+
+                    if (confirmPassword == '' || confirmPassword == null) {
+                        alertMsgFlag = true;
+                        msg = msg + "- Confirm Password. <br/>";
+                    }
+                }
+            }
+            else {
+                if (password == '' || password == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Password. <br/>";
+                }
+
+                if (confirmPassword == '' || confirmPassword == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Confirm Password. <br/>";
+                }
+            }
+
+            if (password != '' && password != null && confirmPassword != '' && confirmPassword != null) {
+                if (password != confirmPassword) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Password and Confirm Password are not same. <br/>";
+                }
+            }
+
+            if (alertMsgFlag) {
+                bootbox.alert({ title: "Please provide value for following field(s):", message: msg });
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        var bindPageEvents = function () {
+            $("#addEditUser").on("click", function () {
+                debugger;
+                if (CreateUser.ValidForm()) {
+                    debugger;
+
+                    var Admin = false;
+                    if ($("#chkAdmin").prop("checked") == true) {
+                        Admin = true;
+                    }
+
+                    var Status = false;
+                    if ($("#chkUserActive").prop("checked") == true) {
+                        Status = true;
+                    }
+
+                    var text = $("#lblStaffMember").text()
+                    var staff = 0;
+                    var doctor = 0;
+
+                    if (text == 'Doctor') {
+                        doctor = $("#ddlMember").val();
+                    }
+
+                    if (text == 'Staff Member') {
+                        staff = $("#ddlMember").val();
+                    }
+
+                    var data = {
+                        User_ID: $("#hdnUserID").val(),
+                        UserType: $("#ddlUserType").val(),
+                        Staff_ID: staff,
+                        Doctor_ID: doctor,
+                        User_Name: $("#txtUserName").val(),
+                        Password: $("#txtPassword").val(),
+                        Super_Admin: Admin,
+                        Active: Status,
+                    }
+
+                    var ID = $("#hdnUserID").val();
+                    var URL = "/Admin/SaveUser/";
+                    var MemberMsg = "";
+                    if (ID > 0) {
+                        URL = "/Admin/UpdateUser/";
+                    }
+                    else {
+
+                        if ($("#ddlUserType").val() == 56) {
+                            MemberMsg = CreateUser.CheckMember($("#ddlUserType").val(), staff);
+                        }
+                        else {
+                            MemberMsg = CreateUser.CheckMember($("#ddlUserType").val(), doctor);
+                        }
+                    }
+
+                    if (ID > 0) {
+                        MemberMsg = 'NotExist';
+                    }
+
+                    if (MemberMsg == 'NotExist') {
+                        var userMSG = '';
+                        if (ID == 0) {
+                            userMSG = CreateUser.CheckUserName($("#txtUserName").val());
+                        }
+                        else {
+                            userMSG = 'NotExist';
+                        }
+
+                        if (userMSG == 'NotExist') {
+                            $.ajax({
+                                url: URL,
+                                type: "POST",
+                                //contentType: false,
+                                dataType: 'json',
+                                data: data,
+                                cache: false,
+                                async: true,
+                                success: function (data) {
+                                    debugger;
+                                    if (data == 'Success') {
+                                        common.SuccessMessage(common.Message.Success);
+                                        common.ResetForm();
+                                        common.SetFormLabel();
+                                        CreateUser.GetUserData();
+                                        $("#hdnUserID").val(0);
+                                        $('#txtUserName').prop('disabled', false);
+                                    } else {
+                                        common.ErrorMessage(common.Message.Error);
+                                    }
+                                },
+                                error: function () {
+                                    common.ErrorMessage(common.Message.Error)
+                                }
+                            });
+                        }
+                        else {
+                            common.ErrorMessage("User Name already used.");
+                        }
+                    }
+                    else {
+                        common.ErrorMessage("User already created for this member");
+                    }
+                }
+            });
+
+            $('#ddlUserType').on('change', function () {
+        
+                var arrMember = [];
+                arrTime.push(new common.DropDown($("#hdnClinicCode").val(), "ClinicCode"));
+                arrTime.push(new common.DropDown($("#ddlUserType").val(), "UserType"));
+                common.FillDropDownListWithParem("ddlMember", "", common.CommonURLs.GetDropDownData, arrMember, "Members", "Error");
+
+                if ($('#ddlUserType').val() == 56) {
+                    $("#lblStaffMember").text('Staff Member')
+                }
+                else {
+                    $("#lblStaffMember").text('Doctor')
+                }
+            });
+
+            $("#cancelStaff").on("click", function () {
+                common.ResetForm();
+                common.SetFormLabel();
+                $("#hdnUserID").val(0);
+                CreateUser.GetUserData();
+            });
+        };
+
+        var URL = "/Admin/GetUserInformation?RequestVerificationToken=@Utility.TokenHeaderValue()";
+        var table;
+        var GetUserData = function () {
+            var Col = [
+                {
+                    data: null,
+                    className: "td-centre",
+                    defaultContent: '<a class="editor_edit" onclick="CreateUser.EditRecord(this);"><i class="fa fa-edit" title="Edit"></i></a>&nbsp;<a class="editor_remove" onclick="CreateUser.DeleteRecord(this);"><i class="fa fa-trash-alt" title="Delete"></i></a>'
+                },
+                { "mDataProp": "User_ID", "visible": false },
+                { "mDataProp": "UserType_ID", "visible": false },
+                { "mDataProp": "UserTypeName" },
+                { "mDataProp": "MemberID", "visible": false },
+                { "mDataProp": "MemberName" },
+                { "mDataProp": "User_Name" },
+                { "mDataProp": "Super_Admin", "visible": false },
+                { "mDataProp": "SuperAdmin" },
+                { "mDataProp": "Active", "visible": false },
+                { "mDataProp": "Status" },
+                { "mDataProp": "Clinic_Code", "visible": false },
+                { "mDataProp": "Created_Date", "visible": false },
+                { "mDataProp": "Created_By", "visible": false },
+                { "mDataProp": "Modified_Date", "visible": false },
+                { "mDataProp": "Modified_By", "visible": false },
+            ];
+
+            common.GridView('TableUserDetail', URL, Col);
+            CreateUser.table = $("#TableUserDetail").DataTable();
+            $('#TableUserDetail_length label select').removeClass('form-control');
+            $('#TableUserDetail_length label select').removeClass('form-control-sm');
+            $('.bottom div').removeClass('row');
+            $('.bottom div').addClass('Botton-row');
+        };
+
+        var EditRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = CreateUser.table.row($(tr)).data();
+            $("#hdnUserID").val(getCell["User_ID"]);
+            $("#ddlUserType").val(getCell["UserType_ID"]).trigger('change');
+            $("#ddlMember").val(getCell["MemberID"]);
+            $("#txtUserName").val(getCell["User_Name"]);
+            if (getCell["Super_Admin"] == true) {
+                $("#chkAdmin").prop('checked', true);
+            }
+            else {
+                $("#chkAdmin").prop('checked', false);
+            }
+            if (getCell["Active"] == true) {
+                $("#chkUserActive").prop('checked', true);
+            }
+            else {
+                $("#chkUserActive").prop('checked', false);
+            }
+            $('#txtUserName').prop('disabled', true);
+            common.SetFormLabel();
+        }
+
+        var DeleteRecord = function (data) {
+            var tr = $(data).parents("tr");
+            var getCell = CreateUser.table.row($(tr)).data();
+            var Id = getCell["User_ID"];
+
+            if (Id > 0) {
+                common.ConfirmBox(function (result) {
+                    if (result) {
+
+                        $.ajax({
+                            url: '/Admin/DeleteUserInformation/',
+                            type: "POST",
+                            data: JSON.stringify({ ID: Id }),
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            async: false,
+                            success: function (data) {
+                                if (data != false) {
+                                    common.SuccessMessage(common.Message.Delete);
+                                    CreateUser.GetUserData();
+                                    common.SetFormLabel();
+                                    $('#txtUserName').prop('disabled', false);
+                                    $("#hdnUserID").val(0);
+                                }
+                                else {
+                                    common.ErrorMessage(common.Message.Error)
+                                }
+                            },
+                            error: function (data) {
+                                //alert(data);
+                                common.ErrorMessage(common.Message.Error)
+                            }
+                        });
+
+                    }
+
+                }, common.Message.Confirm);
+            }
+
+            else {
+                bootbox.alert("Please select record(s) to delete.");
+            }
+        }
+
+
+        CheckMember = function (MemberType, MemberID) {
+            debugger;
+            var msg = 'NotExist';
+            $.ajax({
+                url: '/Admin/CheckMember?RequestVerificationToken=@Utility.TokenHeaderValue()',
+                type: "GET",
+                data: { MemberType: MemberType, MemberID: MemberID },
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                success: function (data) {
+                    if (data == 'Exist') {
+                        msg = 'Exist';
+                    }
+                    else {
+                        msg = 'NotExist';
+                    }
+                },
+                error: function (data) {
+                    //alert(data);
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+
+            return msg;
+        }
+
+        CheckUserName = function (UserName) {
+            debugger;
+            var msg = 'NotExist';
+            $.ajax({
+                url: '/Admin/CheckUserName?RequestVerificationToken=@Utility.TokenHeaderValue()',
+                type: "GET",
+                data: { UserName: UserName },
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                success: function (data) {
+                    if (data == 'Exist') {
+                        msg = 'Exist';
+                    }
+                    else {
+                        msg = 'NotExist';
+                    }
+                },
+                error: function (data) {
+                    //alert(data);
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+
+            return msg;
+        }
+
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            ValidForm: ValidForm,
+            GetUserData: GetUserData,
+            EditRecord: EditRecord,
+            DeleteRecord: DeleteRecord,
+            CheckMember: CheckMember,
+            CheckUserName: CheckUserName
+        };
+    })();
+
+    $(document).ready(function () {
+        CreateUser.init();
+        $('#TableUserDetail_length label select').removeClass('form-control');
+        $('#TableUserDetail_length label select').removeClass('form-control-sm');
+        $('.bottom div').removeClass('row');
+        $('.bottom div').addClass('Botton-row');
+    });
+</script>
+

@@ -1,0 +1,63 @@
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\Commons\bin\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\Commons\bin\Debug\Commons.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\Commons\obj\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\Commons\obj\Debug\Commons.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\Commons.pdb
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\log4net.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Helpers.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Mvc.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Razor.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\log4net.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Helpers.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Mvc.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Razor.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\obj\Debug\Commons.csprojResolveAssemblyReference.cache
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\obj\Debug\Commons.dll
+C:\Users\sohail.arshed\Documents\Visual Studio 2015\Projects\AppointmentManagementSystem\Commons\obj\Debug\Commons.pdb
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\Commons.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\Commons.pdb
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Mvc.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Razor.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Razor.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Helpers.xml
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.xml
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.Razor.xml
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Razor.xml
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\Microsoft.Web.Infrastructure.xml
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Learning\AppointmentManagementSystem\Commons\obj\Debug\Commons.dll
+E:\Learning\AppointmentManagementSystem\Commons\obj\Debug\Commons.pdb
+E:\Learning\AppointmentManagementSystem\Commons\bin\Debug\log4net.xml
+E:\Learning\AppointmentManagementSystem\Commons\obj\Debug\Commons.csprojAssemblyReference.cache
+E:\Learning\AppointmentManagementSystem\Commons\obj\Debug\Commons.csproj.CoreCompileInputs.cache
+E:\Learning\AppointmentManagementSystem\Commons\obj\Debug\Commons.csproj.CopyComplete
+D:\SCM Task\SCM_TaskManagement_System\Commons\obj\Debug\Commons.csproj.CoreCompileInputs.cache
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\Commons.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\Commons.pdb
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\log4net.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.Helpers.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.Razor.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.Razor.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\log4net.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.Helpers.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.Razor.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\bin\Debug\System.Web.WebPages.Razor.xml
+D:\SCM Task\SCM_TaskManagement_System\Commons\obj\Debug\Commons.csproj.CopyComplete
+D:\SCM Task\SCM_TaskManagement_System\Commons\obj\Debug\Commons.dll
+D:\SCM Task\SCM_TaskManagement_System\Commons\obj\Debug\Commons.pdb

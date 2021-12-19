@@ -1,0 +1,337 @@
+﻿@using Commons;
+@{
+    ViewBag.Title = "Administrator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var formName = (Int32)Commons.Enums.ScreenID.Administrator;
+}
+
+@Styles.Render("~/Content/ScreenCSS")
+@Scripts.Render("~/bundles/ScreenScripts")
+<script src="~/Scripts/ActionScripts/Administrator.js"></script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
+{
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">General Setup</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrator</a></li>
+                            <li class="breadcrumb-item active">General Setup</li>
+                        </ol>
+                        @*<button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>*@
+                        <input type="hidden" id="hdnClinicCode" name="hdnClinicCode" value="@Constants.ClinicCode" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card FirstCard">
+                        <div class="card-body">
+                            <h5 class="card-title"> Gender </h5>
+                            <h6 class="card-subtitle">Define Gender Days i.e. Male.</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-8 form-group ">
+                                    <input type="text" id="txtGenderName" name="txtGenderName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtGenderName">Gender Name</label>
+                                </div>
+                                <div class="col-lg-4 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkGenderActive" required="" class="custom-control-input resetCheckbox" id="chkGenderActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkGenderActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="btn-p Rounded-Btn">
+                                <button type="button" id="btnGenderView" class="btn btn-info btn-circle btn-sm" title="View" onclick="Administrator.ViewGeneralData('Gender', 'Gender')"><i class="fa fa-eye"></i></button>
+                                <button type="button" id="btnGenderSave" class="btn btn-success btn-circle btn-sm" title="Save"><i class="fa fa-save"></i></button>
+                                <button type="button" id="btnGenderCancel" class="btn btn-custom btn-circle btn-sm" title="Cancel" onclick="Administrator.ResetData('Gender');"><i class="fa fa-times"></i></button>
+                                <input type="hidden" id="hdnGenderID" name="hdnGenderID" value="0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card FirstCard">
+                        <div class="card-body">
+                            <h5 class="card-title">Marital Status</h5>
+                            <h6 class="card-subtitle">Define Marital Status i.e. Married.</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-8 form-group ">
+                                    <input type="text" id="txtMaritalStatus" name="txtMaritalStatus" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtMaritalStatus">Marital Status</label>
+                                </div>
+                                <div class="col-lg-4 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkMaritalStatusActive" required="" class="custom-control-input resetCheckbox" id="chkMaritalStatusActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkMaritalStatusActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="btn-p Rounded-Btn">
+                                <button type="button" id="btnMaritalStatusView" class="btn btn-info btn-circle btn-sm" title="View" onclick="Administrator.ViewGeneralData('MaritalStatus', 'Marital Status')"><i class="fa fa-eye"></i></button>
+                                <button type="button" id="btnMaritalStatusSave" class="btn btn-success btn-circle btn-sm" title="Save"><i class="fa fa-save"></i></button>
+                                <button type="button" id="btnMaritalStatusCancel" class="btn btn-custom btn-circle btn-sm" title="Cancel" onclick="Administrator.ResetData('MaritalStatus');"><i class="fa fa-times"></i></button>
+                                <input type="hidden" id="hdnMaritalStatusID" name="hdnMaritalStatusID" value="0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Service</h5>
+                            <h6 class="card-subtitle">Define Service. i.e. Surgeon</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-8 form-group ">
+                                    <input type="text" id="txtSpecializationName" name="txtSpecializationName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtSpecializationName">Service Name</label>
+                                </div>
+                                <div class="col-lg-4 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkSpecializationActive" required="" class="custom-control-input resetCheckbox" id="chkSpecializationActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkSpecializationActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="btn-p Rounded-Btn">
+                                <button type="button" id="btnSpecializationView" class="btn btn-info btn-circle btn-sm" title="View"><i class="fa fa-eye" onclick="Administrator.ViewGeneralData('Specialization', 'Specialization')"></i></button>
+                                <button type="button" id="btnSpecializationSave" class="btn btn-success btn-circle btn-sm" title="Save"><i class="fa fa-save"></i></button>
+                                <button type="button" id="btnSpecializationCancel" class="btn btn-custom btn-circle btn-sm" title="Cancel" onclick="Administrator.ResetData('Specialization');"><i class="fa fa-times"></i></button>
+                                <input type="hidden" id="hdnSpecializationID" name="hdnSpecializationID" value="0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"> Disease </h5>
+                            <h6 class="card-subtitle">Define Disease i.e. Fever</h6>
+                            <div class="row m-t-40">
+                                <div class="col-lg-4 form-group ">
+                                    <select class="form-control floating-Select resetDDL bookAppointment" id="ddlService">
+                                        <option value=""></option>
+                                    </select><span class="bar"></span>
+                                    <label for="ddlService">Service</label>
+                                </div>
+                                <div class="col-lg-4 form-group ">
+                                    <input type="text" id="txtDiseaseName" name="txtDiseaseName" class="form-control floating-Input AlphabetsOnly clearText" value="">
+                                    <span class="bar"></span>
+                                    <label for="txtDiseaseName">Disease</label>
+                                </div>
+                                <div class="col-lg-4 custom-control custom-checkbox custom-chk">
+                                    <input type="checkbox" value="x" name="chkDiseaseActive" required="" class="custom-control-input resetCheckbox" id="chkDiseaseActive" aria-invalid="false">
+                                    <label class="custom-control-label" for="chkDiseaseActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="btn-p Rounded-Btn">
+                                <button type="button" id="btnDiseaseView" class="btn btn-info btn-circle btn-sm" title="View" onclick="Administrator.ViewGeneralData('Disease', 'Disease')"><i class="fa fa-eye"></i></button>
+                                <button type="button" id="btnDiseaseSave" class="btn btn-success btn-circle btn-sm" title="Save"><i class="fa fa-save"></i></button>
+                                <button type="button" id="btnDiseaseCancel" class="btn btn-custom btn-circle btn-sm" title="Cancel" onclick="Administrator.ResetData('Disease');"><i class="fa fa-times"></i></button>
+                                <input type="hidden" id="hdnDiseaseID" name="hdnDiseaseID" value="0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var Administrator = (function () {
+        var init = function () {
+
+            var arrSpeciality = [];
+            arrSpeciality.push(new common.DropDown(0, "Speciality"));
+            common.FillDropDownListWithParem("ddlService", "", common.CommonURLs.GetDropDownData, arrSpeciality, "Speciality", "Error");
+            Administrator.bindPageEvents();
+        };
+
+        var bindPageEvents = function () {
+            $("#btnGenderSave").on("click", function () {
+                var txt = $("#txtGenderName").val();
+                var chk = ""
+                if ($("#chkGenderActive").prop("checked") == true) {
+                    chk = 'x';
+                }
+                var ID = $("#hdnGenderID").val();
+                Administrator.SaveGeneralData(ID, '', txt, chk, 'Gender', '/Admin/SaveSetupFormData/');
+            });
+
+            $("#btnMaritalStatusSave").on("click", function () {
+                var txt = $("#txtMaritalStatus").val();
+                var chk = ""
+                if ($("#chkMaritalStatusActive").prop("checked") == true) {
+                    chk = 'x';
+                }
+                var ID = $("#hdnMaritalStatusID").val();
+                Administrator.SaveGeneralData(ID, '', txt, chk, 'MaritalStatus', '/Admin/SaveSetupFormData/');
+            });
+
+            $("#btnDiseaseSave").on("click", function () {
+                var txt = $("#txtDiseaseName").val();
+                var ddl = $("#ddlService").val();
+                var chk = ""
+                if ($("#chkDiseaseActive").prop("checked") == true) {
+                    chk = 'x';
+                }
+                var ID = $("#hdnDiseaseID").val();
+                Administrator.SaveGeneralData(ID, ddl, txt, chk, 'Disease', '/Admin/SaveSetupFormData/');
+            });
+
+            $("#btnSpecializationSave").on("click", function () {
+                var txt = $("#txtSpecializationName").val();
+                var chk = ""
+                if ($("#chkSpecializationActive").prop("checked") == true) {
+                    chk = 'x';
+                }
+                var ID = $("#hdnSpecializationID").val();
+                Administrator.SaveGeneralData(ID, '', txt, chk, 'Specialization', '/Admin/SaveSetupFormData/');
+            });
+
+            $("#cancelBank").on("click", function () {
+                common.ResetForm();
+                common.SetFormLabel();
+                $("#hdnBankID").val(0);
+            });
+        };
+
+        var ValidForm = function (type) {
+            var msg = '';
+            alertMsgFlag = false;
+            if (type == 'Gender') {
+                var Gender = $("#txtGenderName").val()
+                if (Gender == '' || Gender == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Gender Name. <br/>";
+                }
+            }
+
+            if (type == 'MaritalStatus') {
+                var MaritalStatus = $("#txtMaritalStatus").val()
+                if (MaritalStatus == '' || MaritalStatus == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Marital Status. <br/>";
+                }
+            }
+
+            if (type == 'Disease') {
+                var Disease = $("#txtDiseaseName").val()
+                if (Disease == '' || Disease == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Disease Name. <br/>";
+                }
+
+                var service = $("#ddlService").val()
+                if (service == '' || service == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Service Name. <br/>";
+                }
+            }
+
+            if (type == 'Specialization') {
+                var Specialization = $("#txtSpecializationName").val()
+                if (Specialization == '' || Specialization == null) {
+                    alertMsgFlag = true;
+                    msg = msg + "- Specialization Name. <br/>";
+                }
+            }
+
+            if (alertMsgFlag) {
+                bootbox.alert({ title: "Please provide value for following field(s):", message: msg });
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        var ViewGeneralData = function (type, discription) {
+
+            common.openBSModelPopupLvl1('/Admin/ViewGeneralData?&GeneralType=' + type + '&RequestVerificationToken=@Utility.TokenHeaderValue()', 'small', discription);
+        }
+
+        var ResetData = function (type) {
+            if (type == 'Gender') {
+                $("#txtGenderName").val('');
+                $("#chkGenderActive").prop('checked', false);
+                $("#hdnGenderID").val(0);
+            }
+
+            if (type == 'MaritalStatus') {
+                $("#txtMaritalStatus").val('');
+                $("#chkMaritalStatusActive").prop('checked', false);
+                $("#hdnMaritalStatusID").val(0);
+            }
+
+            if (type == 'Disease') {
+                $("#txtDiseaseName").val('');
+                $("#ddlService").val('');
+                $("#chkDiseaseActive").prop('checked', false);
+                $("#hdnDiseaseID").val(0);
+            }
+
+            if (type == 'Specialization') {
+                $("#txtSpecializationName").val('');
+                $("#chkSpecializationActive").prop('checked', false);
+                $("#hdnSpecializationID").val(0);
+            }
+
+            common.SetFormLabel();
+        }
+        var SaveGeneralData = function (hdnID, ddl, txtField, chkField, Type, URL) {
+            if (ValidForm(Type)) {
+                debugger;
+                var Status = false;
+                if (chkField == 'x') {
+                    Status = true;
+                }
+
+                $.ajax({
+                    url: URL,
+                    type: "POST",
+                    //contentType: false,
+                    dataType: 'json',
+                    data: { FieldID: hdnID, ddlField: ddl, FieldText: txtField, Active: Status, Type: Type },
+                    cache: false,
+                    async: true,
+                    success: function (data) {
+                        debugger;
+                        if (data == 'Success') {
+                            common.SuccessMessage(common.Message.Success);
+                            common.ResetForm();
+                            common.SetFormLabel();
+                        } else {
+                            common.ErrorMessage(common.Message.Error);
+                        }
+                    },
+                    error: function () {
+                        common.ErrorMessage(common.Message.Error)
+                    }
+                });
+            };
+        }
+        return {
+            init: init,
+            bindPageEvents: bindPageEvents,
+            SaveGeneralData: SaveGeneralData,
+            ViewGeneralData: ViewGeneralData,
+            ResetData: ResetData
+        };
+    })();
+
+    $(document).ready(function () {
+        Administrator.init();
+        //var ab = Security2.GetToken();
+        //console.log(ab);
+        //alert(ab);
+        //Security.GetToken();
+    });
+
+
+</script>

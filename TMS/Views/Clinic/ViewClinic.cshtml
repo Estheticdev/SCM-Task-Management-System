@@ -1,0 +1,141 @@
+﻿@using Commons;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View Activity</title>
+    <script src="~/Scripts/ActionScripts/ViewClinic.js"></script>
+    <style>
+           .popPadding {
+            padding: 0px !important;
+        }
+    </style>
+
+</head>
+<body>
+    <form id="@Convert.ToInt32(Enums.ScreenID.ViewClinic)">
+        <div class="col-lg-12 col-xlg-3 col-md-12 col-sm-12">
+            <div class="card">
+                <input type="hidden" id="hdnRecordNumber" name="hdnRecordNumber" value='@Request.QueryString["RecordNumber"]' />
+                <div class="card-body popPadding">
+                    <!-- .row -->
+                    <div class="row">
+                        <div class="col-md-4 b-r">
+                            @*<p id="pHospitalName"> <img style="width:5%" src="~/Content/Images/FatimaComplex_Logo.png" />&nbsp; </p>
+                            <p id="pContact"><i class="fa fa-mobile-alt"></i>&nbsp; </p>
+                            <p id="pEmail"><i class="fa fa-envelope"></i>&nbsp; </p>
+                            <p id="pWebsite"><i class="fa fa-globe"></i>&nbsp; </p>*@
+
+                            <p id="pRecordNumber">&nbsp;Record Number :  </p>
+                            <p id="pContent_Type">&nbsp;Project Type : </p>
+                            <p id="pProjectName">&nbsp;Project Name : </p>
+                            <p id="pPro_Rel_Pat_number">&nbsp;Release# :</p>
+
+                        </div>
+                        <div class="col-md-4 b-r">
+                            <p id="pPlan_Codefreeze">&nbsp;Plan CodeFreeze :</p>
+                            <p id="pplan_shipment">@*<i class="fa fa-flag"></i>*@&nbsp;Plan Shipment :</p>
+                            <p id="pactual_codefreeze">&nbsp;Actual CodeFreeze :</p>
+                            <p id="pactual_shipment">&nbsp;Actual Shipment :</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p id="pcomments">&nbsp;Status :</p>
+                            <p id="pprimary_name">&nbsp;Primary :</p>
+                            <p id="psecondary_name">&nbsp;Secondary :</p>
+                            @*<p id="pModifiedDate"><i class="fa fa-calendar-check"></i>&nbsp; </p>*@
+                        </div>
+                    </div>
+                    <!--<hr>-->
+                    <!-- /.row -->
+                    <!-- .row -->
+                    <!--<div class="row text-center">
+                        <div class="col-md-6 b-r">
+                            <i class="fa fa-sticky-note"></i>
+                            <p id="pDiscription"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p id="pAddress"></p>
+                        </div>
+                    </div>
+                    <hr>-->
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    var ViewClinic = (function () {
+        var init = function () {
+            var id = $("#hdnRecordNumber").val();
+            ViewClinic.GetClinicDataForView(id);
+        };
+
+        var GetClinicDataForView = function (RecordNumber) {
+            URL = "/Clinic/GetClinicDetailByID?RequestVerificationToken=@Utility.TokenHeaderValue()";
+            $.ajax({
+                url: URL,
+                type: "GET",
+                dataType: 'json',
+                data: { "RecordNumber": RecordNumber },
+                //data: { "RecordNumber": $("#RecordNumber").val() },
+                async: true,
+                success: function (data) {
+                    debugger;
+                    if (data != 'Error') {
+
+                        ViewClinic.PopulateValue(data)
+                    } else {
+                        common.ErrorMessage(common.Message.Error);
+                    }
+                },
+                error: function () {
+                    common.ErrorMessage(common.Message.Error)
+                }
+            });
+        }
+
+        var PopulateValue = function (data) {
+            debugger;
+            $("#pRecordNumber").append(' ' + data[0]['RecordNumber']);
+            $("#pContent_Type").append(' ' + data[0]['Content_Type']);
+            $("#pProjectName").append(' ' + data[0]['ProjectName']);
+            $("#pPro_Rel_Pat_number").append(' ' + data[0]['Pro_Rel_Pat_number']);
+            $("#pPlan_Codefreeze").append(' ' + common.toDate(data[0]['Plan_Codefreeze']));
+            $("#pplan_shipment").append(' ' + common.toDate(data[0]['plan_shipment']));
+            $("#pcomments").append(' ' + data[0]['comments']);
+            $("#pactual_codefreeze").append(' ' + common.toDate(data[0]['actual_codefreeze']));
+            $("#pactual_shipment").append(' ' + common.toDate(data[0]['actual_shipment']));
+            if (data[0]['primary_name'] != null) {
+                $("#pprimary_name").append(' ' + data[0]['primary_name']);
+            }
+            if (data[0]['secondary_name'] != null) {
+                $("#psecondary_name").append(' ' + data[0]['secondary_name']);
+            }
+            //$("#pModifiedDate").append(' ' + common.toDate(data[0]['Modified_Date']));
+            //$("#pDiscription").append(' ' + data[0]['Discription']);
+            //$("#pAddress").append(' ' + data[0]['Address']);
+        }
+
+        var ClosePopupLvl1Button = function () {
+            $("#first-modal-window").modal("hide");
+            $("#first-modal-window .modal-body").html("");
+        }
+
+        return {
+            init: init,
+            GetClinicDataForView: GetClinicDataForView,
+            PopulateValue: PopulateValue
+        };
+    })();
+
+    $(document).ready(function () {
+        ViewClinic.init();
+    });
+</script>
