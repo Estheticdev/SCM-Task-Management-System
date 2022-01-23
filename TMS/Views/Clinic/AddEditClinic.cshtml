@@ -11,7 +11,7 @@
 
 @Styles.Render("~/Content/ScreenCSS")
 @Scripts.Render("~/bundles/ScreenScripts")
-<script src="@Url.Content("~/Scripts/ActionScripts/ClinicScripts.js")"></script>
+@*<script src="@Url.Content("~/Scripts/ActionScripts/ClinicScripts.js")"></script>*@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
 {
@@ -758,87 +758,94 @@
 
                 var hdTotal = $("#txtHDTotal").val();
                 var pTotal = $("#txtPTotal").val();
-                if ($("txtActualCodeFreeze").val() <= $("TxtActualShipment").val()) {
+
+                if ($("#txtPlanCodeFreeze").val() <= $("#TxtPlanShipment").val()) {
                     if (hdTotal == pTotal) {
+                        if ($("#txtActualCodeFreeze").val() <= $("#TxtActualShipment").val()) {
+                            var data = {
 
+                                RecordNumber: id,
+                                Content_Type: $("#ddlProjectList").val(),
+                                ProjectName: $("#ddlClient").val(),
+                                Pro_Rel_Pat_number: $("#txtReleasePatchNumber").val(),
+                                Plan_Codefreeze: $("#txtPlanCodeFreeze").val(),
+                                plan_shipment: $("#TxtPlanShipment").val(),
+                                jira_issue: $("#txtJira").val(),
+                                optimization: $("#txtOptimization").val(),
+                                actual_build: $("#txtTotalBuilds").val(),
+                                actual_codefreeze: $("#txtActualCodeFreeze").val(),
+                                actual_shipment: $("#TxtActualShipment").val(),
+                                comments: $("#ddlStatus").val(),
+                                internal_cr: $("#txtInternalCRs").val(),
+                                uat_issue: $("#txtUAT").val(),
+                                gaps: $("#txtGAPs").val(),
+                                fault: $("#txtFault").val(),
+                                modification: $("#txtModification").val(),
+                                datacorrection: $("#txtDataCorrection").val(),
+                                enhacement: $("#txtEnhancement").val(),
+                                others: $("#txtOthers").val(),
+                                total_category_hd: $("#txtHDTotal").val(),
+                                crittical: $("#txtCritical").val(),
+                                minor: $("#txtMinor").val(),
+                                moderate: $("#txtModerate").val(),
+                                total_priory_hd: $("#txtPriorityTotal").val(),
+                                time_planned_code_freeze: $("#txtPlanCodeFreezeTime").val(),
+                                time_actual_code_freeze: $("#txtActualCodeFreezeTime").val(),
+                                time_planned_shipment: $("#TxtPlanShipmentTime").val(),
+                                time_actual_shipment: $("#TxtActualShipmentTime").val(),
+                                primary_name: $("#ddlPrimary").val(),
+                                secondary_name: $("#ddlSecondary").val(),
+                                // status:$("#status").val(),////////////
+                                effor_hours: $("#txtEffort").val()
 
-                        var data = {
-                            
-                            RecordNumber: id,
-                            Content_Type: $("#ddlProjectList").val(),
-                            ProjectName: $("#ddlClient").val(),
-                            Pro_Rel_Pat_number: $("#txtReleasePatchNumber").val(),
-                            Plan_Codefreeze: $("#txtPlanCodeFreeze").val(),
-                            plan_shipment: $("#TxtPlanShipment").val(),
-                            jira_issue: $("#txtJira").val(),
-                            optimization: $("#txtOptimization").val(),
-                            actual_build: $("#txtTotalBuilds").val(),
-                            actual_codefreeze: $("#txtActualCodeFreeze").val(),
-                            actual_shipment: $("#TxtActualShipment").val(),
-                            comments: $("#ddlStatus").val(),
-                            internal_cr: $("#txtInternalCRs").val(),
-                            uat_issue: $("#txtUAT").val(),
-                            gaps: $("#txtGAPs").val(),
-                            fault: $("#txtFault").val(),
-                            modification: $("#txtModification").val(),
-                            datacorrection: $("#txtDataCorrection").val(),
-                            enhacement: $("#txtEnhancement").val(),
-                            others: $("#txtOthers").val(),
-                            total_category_hd: $("#txtHDTotal").val(),
-                            crittical: $("#txtCritical").val(),
-                            minor: $("#txtMinor").val(),
-                            moderate: $("#txtModerate").val(),
-                            total_priory_hd: $("#txtPriorityTotal").val(),
-                            time_planned_code_freeze: $("#txtPlanCodeFreezeTime").val(),
-                            time_actual_code_freeze: $("#txtActualCodeFreezeTime").val(),
-                            time_planned_shipment: $("#TxtPlanShipmentTime").val(),
-                            time_actual_shipment: $("#TxtActualShipmentTime").val(),
-                            primary_name: $("#ddlPrimary").val(),
-                            secondary_name: $("#ddlSecondary").val(),
-                            // status:$("#status").val(),////////////
-                            effor_hours: $("#txtEffort").val()
-
-                            /////////////////////////////////
-                        }
-
-                        //var ID = $("#Clinic_ID").val();
-                        //var URL = "/Clinic/AddClinicIndformation/";
-
-                        //if (ID > 0) {
-                        //    URL = "/Clinic/UpdateClinicIndformation/";
-                        //}
-                        console.log(data);
-                        URL = "/Clinic/Saveupdateactivitysheet/";
-
-                        $.ajax({
-                            url: URL,
-                            type: "POST",
-                            //contentType: false,
-                            dataType: 'json',
-                            data: data,
-                            cache: false,
-                            async: true,
-                            success: function (data) {
-                                debugger;
-                                if (data == 'Success') {
-                                    common.SuccessMessage(common.Message.Success);
-                                    common.ResetForm();
-                                    common.SetFormLabel();
-                                } else {
-                                    common.ErrorMessage(common.Message.Error);
-                                }
-                            },
-                            error: function () {
-                                common.ErrorMessage(common.Message.Error)
+                                /////////////////////////////////
                             }
-                        });
+
+                            //var ID = $("#Clinic_ID").val();
+                            //var URL = "/Clinic/AddClinicIndformation/";
+
+                            //if (ID > 0) {
+                            //    URL = "/Clinic/UpdateClinicIndformation/";
+                            //}
+                            console.log(data);
+                            URL = "/Clinic/Saveupdateactivitysheet/";
+
+                            $.ajax({
+                                url: URL,
+                                type: "POST",
+                                //contentType: false,
+                                dataType: 'json',
+                                data: data,
+                                cache: false,
+                                async: true,
+                                success: function (data) {
+                                    debugger;
+                                    if (data == 'Success') {
+                                        common.SuccessMessage(common.Message.Success);
+                                        common.ResetForm();
+                                        var dt = new Date();
+                                        $("#txtPlanCodeFreeze").val(common.toDate(dt));
+                                        $("#TxtPlanShipment").val(common.toDate(dt));
+                                        common.SetFormLabel();
+                                    } else {
+                                        common.ErrorMessage(common.Message.Error);
+                                    }
+                                },
+                                error: function () {
+                                    common.ErrorMessage(common.Message.Error)
+                                }
+                            });
+                        }
+                        else {
+                            common.ErrorMessage("Kindly Check the HD total must be equal to Priority Total")
+                        }
                     }
                     else {
-                        common.ErrorMessage("Kindly Check the HD total must be equal to Priority Total")
+                        common.ErrorMessage("Actual Code Freeze Date must be less than or equal to the Actual Shipment Date")
                     }
                 }
                 else {
-                    common.ErrorMessage("Code Freeze Date must be less than Shipment Date")
+                    common.ErrorMessage("Code Freeze Date must be less than or equal to the Shipment Date")
                 }
             });
 
@@ -861,6 +868,9 @@
                                     if (data != false) {
                                         common.SuccessMessage(common.Message.Delete);
                                         common.ResetForm();
+                                        var dt = new Date();
+                                        $("#txtPlanCodeFreeze").val(common.toDate(dt));
+                                        $("#TxtPlanShipment").val(common.toDate(dt));
                                         common.SetFormLabel();
                                     }
                                     else {
@@ -897,6 +907,12 @@
     })();
 
     $(document).ready(function () {
+
+        var dt = new Date();
+        $("#txtPlanCodeFreeze").val(common.toDate(dt));
+        $("#TxtPlanShipment").val(common.toDate(dt));
+        common.SetFormLabel();
+
         Clinic.init();
         //File Upload
         $(".fileinput-upload-button").hide();
