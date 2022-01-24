@@ -13,6 +13,16 @@
 @Scripts.Render("~/bundles/ScreenScripts")
 @*<script src="@Url.Content("~/Scripts/ActionScripts/ClinicScripts.js")"></script>*@
 
+@*<style>
+    input[type=date]::-webkit-inner-spin-button,
+    input[type=date]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type=date] {
+        -moz-appearance: textfield;
+    }
+</style>*@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @enctype = "multipart/form-data", name = formName, id = formName, @class = "floating-labels form-horizontal" }))
 {
 <div class="page-wrapper">
@@ -120,7 +130,7 @@
 
                         <div class="row">
                             <div class="col-lg-3 form-group">
-                                <input type="text" id="txtPlanCodeFreeze" name="dtpCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerAll" value="">
+                                <input type="date" id="txtPlanCodeFreeze" name="dtpCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment" value="">
                                 <span class="bar"></span>
                                 <label class="lbl" for="dtpPatientAge">Planned Code Freeze</label>
                             </div>
@@ -130,7 +140,7 @@
                                 <label class="lbl" for="dtpPatientAge">Planned Code Freeze Time</label>
                             </div>
                                 <div class="col-lg-3 form-group">
-                                    <input type="text" id="txtActualCodeFreeze" name="dtpActulaCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerAll" value="">
+                                    <input type="text" id="txtActualCodeFreeze" name="dtpActulaCodeFreeze" data-language='en' class="form-control floating-Input clearText bookAppointment" value="" onfocus="(this.type = 'date'); ActualCodeFreezeFN();" onblur="if (!this.value) this.type = 'text'; ActualCodeFreezeFN();">
                                     <span class="bar"></span>
                                     <label class="lbl" for="dtpPatientAge">Actual Code Freeze</label>
                                 </div>
@@ -144,7 +154,7 @@
                         <div class="row">
 
                             <div class="col-lg-3 form-group">
-                                <input type="text" id="TxtPlanShipment" name="dtpPlanShipment" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerAll" value="">
+                                <input type="date" id="TxtPlanShipment" name="dtpPlanShipment" data-language='en' class="form-control floating-Input clearText bookAppointment" value="">
                                 <span class="bar"></span>
                                 <label class="lbl" for="dtpPatientAge">Planned Shipment</label>
                             </div>
@@ -154,7 +164,7 @@
                                 <label class="lbl" for="dtpPatientAge">Planned Shipment Time</label>
                             </div>
                             <div class="col-lg-3 form-group">
-                                <input type="text" id="TxtActualShipment" name="dtpActualShipment" data-language='en' class="form-control floating-Input clearText bookAppointment datePickerAll" value="">
+                                <input type="text" id="TxtActualShipment" name="dtpActualShipment" data-language='en' class="form-control floating-Input clearText bookAppointment" value="" onfocus="(this.type = 'date'); ActualShipmentFN();" onblur="if (!this.value) this.type = 'text'; ActualShipmentFN();">
                                 <span class="bar"></span>
                                 <label class="lbl" for="dtpPatientAge">Actual Shipment</label>
                             </div>
@@ -318,6 +328,10 @@
                 
 }
 <script>
+    var isEdit = 0;
+    var dtActualCodeFreeze;
+    var dtActualShipment;
+
     var Clinic = (function () {
 
         var baseUrl = "";
@@ -650,7 +664,8 @@
                 success: function (data) {
                     if (data != 'Error') {
                         console.log(data);
-                        Clinic.PopulateValue(data)
+                        Clinic.PopulateValue(data);
+                        isEdit = 1;
                     } else {
                         common.ErrorMessage(common.Message.Error);
                     }
@@ -673,14 +688,30 @@
                 $("#ddlProjectList").val(data[0]['Content_Type']);
             $("#ddlClient").val(data[0]['ProjectName']);
             $("#txtReleasePatchNumber").val(data[0]['Pro_Rel_Pat_number']);
-            $("#txtPlanCodeFreeze").val(common.toDate(data[0]['Plan_Codefreeze']));
-            $("#TxtPlanShipment").val(common.toDate(data[0]['plan_shipment']));
+
+            //$("#txtPlanCodeFreeze").val(common.toDate(data[0]['Plan_Codefreeze']));
+            //$("#TxtPlanShipment").val(common.toDate(data[0]['plan_shipment']));
+
             //$("#shipped").val(data[0]['shipped']);/////////////////
             $("#txtJira").val(data[0]['jira_issue']);
             $("#txtOptimization").val(data[0]['optimization']);
             $("#txtTotalBuilds").val(data[0]['actual_build']);
+
+            dtActualCodeFreeze = common.toDate(data[0]['actual_codefreeze']);
+            dtActualShipment = common.toDate(data[0]['actual_shipment']);
+
             $("#txtActualCodeFreeze").val(common.toDate(data[0]['actual_codefreeze']));
             $("#TxtActualShipment").val(common.toDate(data[0]['actual_shipment']));
+
+            var d1 = new Date(common.toDate(data[0]['Plan_Codefreeze']));;
+            var utcDate1 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate()));
+
+            var d2 = new Date(common.toDate(data[0]['plan_shipment']));;
+            var utcDate2 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate()));
+
+            document.getElementById("txtPlanCodeFreeze").valueAsDate = utcDate1;
+            document.getElementById("TxtPlanShipment").valueAsDate = utcDate2;
+
             //$("#build_machine").val(data[0]['build_machine']);/////////////
             //$("#client").val(data[0]['client']);//////////
             $("#ddlStatus").val(data[0]['comments']);
@@ -823,9 +854,12 @@
                                     if (data == 'Success') {
                                         common.SuccessMessage(common.Message.Success);
                                         common.ResetForm();
-                                        var dt = new Date();
-                                        $("#txtPlanCodeFreeze").val(common.toDate(dt));
-                                        $("#TxtPlanShipment").val(common.toDate(dt));
+
+                                        var d = new Date();
+                                        var utcDate = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+                                        document.getElementById("txtPlanCodeFreeze").valueAsDate = utcDate;
+                                        document.getElementById("TxtPlanShipment").valueAsDate = utcDate;
+                                        isEdit = 0;
                                         common.SetFormLabel();
                                     } else {
                                         common.ErrorMessage(common.Message.Error);
@@ -837,11 +871,11 @@
                             });
                         }
                         else {
-                            common.ErrorMessage("Kindly Check the HD total must be equal to Priority Total")
+                            common.ErrorMessage("Actual Code Freeze Date must be less than or equal to the Actual Shipment Date")
                         }
                     }
                     else {
-                        common.ErrorMessage("Actual Code Freeze Date must be less than or equal to the Actual Shipment Date")
+                        common.ErrorMessage("Kindly Check the HD total must be equal to Priority Total")
                     }
                 }
                 else {
@@ -868,9 +902,7 @@
                                     if (data != false) {
                                         common.SuccessMessage(common.Message.Delete);
                                         common.ResetForm();
-                                        var dt = new Date();
-                                        $("#txtPlanCodeFreeze").val(common.toDate(dt));
-                                        $("#TxtPlanShipment").val(common.toDate(dt));
+                                        isEdit = 0;
                                         common.SetFormLabel();
                                     }
                                     else {
@@ -908,9 +940,12 @@
 
     $(document).ready(function () {
 
-        var dt = new Date();
-        $("#txtPlanCodeFreeze").val(common.toDate(dt));
-        $("#TxtPlanShipment").val(common.toDate(dt));
+        var d = new Date();
+        var utcDate = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+
+        document.getElementById("txtPlanCodeFreeze").valueAsDate = utcDate;
+        document.getElementById("TxtPlanShipment").valueAsDate = utcDate;
+
         common.SetFormLabel();
 
         Clinic.init();
@@ -946,4 +981,22 @@
             }
         });
     })
+
+    function ActualCodeFreezeFN() {
+        if (isEdit == 1) {
+            if ($('#txtActualCodeFreeze').val() == '' || $('#txtActualCodeFreeze').val() == null) {
+                $('#txtActualCodeFreeze').val(dtActualCodeFreeze)
+                common.SetFormLabel();
+            }
+        }
+    }
+
+    function ActualShipmentFN() {
+        if (isEdit == 1) {
+            if ($('#TxtActualShipment').val() == '' || $('#TxtActualShipment').val() == null) {
+                $('#TxtActualShipment').val(dtActualShipment)
+                common.SetFormLabel();
+            }
+        }
+    }
 </script>
